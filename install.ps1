@@ -7,5 +7,6 @@ $exe = @($root) + (Get-ChildItem $root -Directory -Filter 'Zalo-*' -ErrorAction 
   ? { Test-Path "$_\resources\app.asar" } | % { "$_\Zalo.exe" } | Select-Object -First 1
 if (-not $exe) { Write-Error "Không tìm thấy Zalo. Đặt `$env:ZALO_APP=<thư mục cài Zalo>."; exit 1 }
 $env:ELECTRON_RUN_AS_NODE = 1
-& $exe "$PSScriptRoot\install.mjs" @args
-exit $LASTEXITCODE
+# Zalo.exe là app GUI: gọi thẳng bằng & thì PowerShell không chờ và mất output, nên dùng Start-Process -Wait
+$p = Start-Process $exe -ArgumentList (@("`"$PSScriptRoot\install.mjs`"") + $args) -Wait -PassThru -NoNewWindow
+exit $p.ExitCode
