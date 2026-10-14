@@ -1,0 +1,178 @@
+/* Zalo Glass — glassmorphism + ambient. Override token màu của Zalo (body thắng :root/.dark_xxx nhờ !important). */
+
+body {
+  /* nền + lớp kính */
+  --bg-default: transparent !important;
+  --title-bar: rgba(8, 10, 22, 0.35) !important;
+  --surface-background: rgba(12, 14, 28, 0.38) !important;
+  --surface-background-subtle: rgba(255, 255, 255, 0.035) !important;
+  --surface-background-overlay: rgba(14, 16, 32, 0.55) !important;
+  --surface-alt: rgba(255, 255, 255, 0.05) !important;
+  --layer-background: rgba(255, 255, 255, 0.05) !important;
+  --layer-background-subtle: rgba(255, 255, 255, 0.035) !important;
+  --layer-background-hover: rgba(255, 255, 255, 0.08) !important;
+  --layer-background-disabled: rgba(255, 255, 255, 0.03) !important;
+  --layer-background-selected: rgba(139, 120, 255, 0.22) !important;
+  --layer-background-CSC: rgba(255, 255, 255, 0.035) !important;
+  --layer-background-pinned: rgba(255, 255, 255, 0.04) !important;
+  --layer-background-leftmenu: rgba(8, 10, 22, 0.45) !important;
+  --layer-background-leftmenu-hover: rgba(255, 255, 255, 0.08) !important;
+  --layer-background-leftmenu-selected: rgba(139, 120, 255, 0.28) !important;
+  --layer-background-navbar-normal: rgba(8, 10, 22, 0.45) !important;
+  --layer-background-navbar-hover: rgba(255, 255, 255, 0.1) !important;
+  --layer-background-navbar-selected: rgba(139, 120, 255, 0.3) !important;
+  --layer-background-navbar-sublevel-normal: rgba(255, 255, 255, 0.04) !important;
+  --layer-background-navbar-sublevel-hover: rgba(255, 255, 255, 0.08) !important;
+  --layer-background-navbar-sublevel-selected: rgba(139, 120, 255, 0.22) !important;
+  --layer-neutral-information-background: rgba(255, 255, 255, 0.05) !important;
+  --background-inactiveness: rgba(12, 14, 28, 0.38) !important;
+  --item-wa-hover: rgba(255, 255, 255, 0.08) !important;
+  --item-wa-select: rgba(139, 120, 255, 0.22) !important;
+  --icon-hover-bg: rgba(255, 255, 255, 0.1) !important;
+  --reaction-background: rgba(30, 32, 52, 0.85) !important;
+  --timestamp: rgba(255, 255, 255, 0.06) !important;
+  --bg-message-info: rgba(255, 255, 255, 0.06) !important;
+  --skeleton: rgba(255, 255, 255, 0.08) !important;
+  --skeleton-subtle: rgba(255, 255, 255, 0.04) !important;
+
+  /* bubble chat */
+  --white-message: rgba(255, 255, 255, 0.09) !important;
+  --white-message-selected: rgba(255, 255, 255, 0.14) !important;
+  --white-quote: rgba(255, 255, 255, 0.06) !important;
+  --white-quote-selected: rgba(255, 255, 255, 0.1) !important;
+  --blue-message: rgba(110, 96, 255, 0.34) !important;
+  --blue-message-selected: rgba(110, 96, 255, 0.46) !important;
+  --blue-quote: rgba(0, 0, 0, 0.2) !important;
+  --blue-quote-selected: rgba(0, 0, 0, 0.28) !important;
+  --self-bubble-chat-shadow: rgba(0, 0, 0, 0) !important;
+  --shadow-bubble: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 4px 14px rgba(0, 0, 0, 0.18) !important;
+
+  /* input */
+  --input-white: rgba(255, 255, 255, 0.06) !important;
+  --input-grey: rgba(255, 255, 255, 0.07) !important;
+  --input-placeholder-wh: #a3a9c2 !important;
+  --input-placeholder-gr: #a3a9c2 !important;
+  --input-icon-wh: #dfe2f0 !important;
+  --input-icon-gr: #dfe2f0 !important;
+  --input-field-bg-filled: rgba(255, 255, 255, 0.06) !important;
+  --input-field-bg-filled-hover: rgba(255, 255, 255, 0.09) !important;
+  --input-field-bg-filled-pressed: rgba(255, 255, 255, 0.12) !important;
+  --input-field-bg-outline: rgba(255, 255, 255, 0.04) !important;
+  --input-field-bg-outline-hover: rgba(255, 255, 255, 0.08) !important;
+
+  /* chữ + icon (đặt luôn để chạy được cả khi Zalo đang ở light mode) */
+  --text-primary: #eef0f8 !important;
+  --text-secondary: #a7aec6 !important;
+  --text-placeholder: #7f86a3 !important;
+  --text-disabled: #6c7290 !important;
+  --text-quote: #cfd3e6 !important;
+  --text-navbar-sublevel-normal: #eef0f8 !important;
+  --text-navbar-sublevel-selected: #ffffff !important;
+  --tab-txt: #b9bfd6 !important;
+  --icon-primary: #e6e9f5 !important;
+  --icon-secondary: #a7aec6 !important;
+  --icon-navbar-normal: #e6e9f5 !important;
+  --icon-navbar-sublevel-normal: #a99dff !important;
+  --icon-navbar-sublevel-selected: #c3baff !important;
+
+  /* viền */
+  --border: rgba(255, 255, 255, 0.12) !important;
+  --border-subtle: rgba(255, 255, 255, 0.08) !important;
+  --border-hover: rgba(255, 255, 255, 0.18) !important;
+  --border-focused: #a99dff !important;
+  --divider: rgba(255, 255, 255, 0.07) !important;
+  --divider-subtle: rgba(255, 255, 255, 0.04) !important;
+
+  /* accent */
+  --link: #8fa8ff !important;
+  --cta-link: #a99dff !important;
+  --cta-link-primary: #a99dff !important;
+  --text-mention: #a99dff !important;
+  --button-primary-normal: #6e60ff !important;
+  --button-primary-hover: #8577ff !important;
+  --button-primary-pressed: #5848e6 !important;
+  --button-primary-text: #ffffff !important;
+  --button-secondary-neutral-normal: rgba(255, 255, 255, 0.08) !important;
+  --button-secondary-neutral-hover: rgba(255, 255, 255, 0.13) !important;
+  --button-secondary-neutral-pressed: rgba(255, 255, 255, 0.05) !important;
+  --button-secondary-neutral-text: #eef0f8 !important;
+  --button-tertiary-neutral-hover: rgba(255, 255, 255, 0.1) !important;
+  --button-tertiary-primary-hover: rgba(139, 120, 255, 0.18) !important;
+
+  --shadow-overlay: 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 20px 50px rgba(0, 0, 0, 0.45) !important;
+  --curtain: rgba(4, 5, 12, 0.45) !important;
+  --toast: rgba(20, 22, 40, 0.75) !important;
+
+  background: transparent !important;
+}
+
+/* ---------- ambient ---------- */
+html {
+  background: #070814 !important;
+}
+
+/* ponytail: ambient tĩnh. Bản animation (trôi + blur) ăn ~50% CPU liên tục lúc Zalo để yên → bỏ. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(45% 50% at 12% 15%, rgba(124, 92, 255, 0.42), transparent 75%),
+    radial-gradient(45% 50% at 92% 8%, rgba(0, 190, 255, 0.28), transparent 75%),
+    radial-gradient(50% 45% at 80% 95%, rgba(255, 70, 170, 0.26), transparent 75%),
+    radial-gradient(40% 40% at 20% 90%, rgba(40, 220, 190, 0.18), transparent 75%),
+    radial-gradient(35% 35% at 55% 50%, rgba(90, 110, 255, 0.16), transparent 75%);
+}
+
+/* ---------- kính cho lớp nổi (menu, modal, popover, toast) ---------- */
+.zl-modal__dialog,
+.zmenu-body,
+.zmenu,
+.popover,
+.tooltip,
+.toast,
+[class*="popover"],
+[class*="context-menu"],
+[class*="dropdown-menu"] {
+  background-color: rgba(22, 24, 44, 0.62) !important;
+  backdrop-filter: blur(28px) saturate(170%);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.zl-modal__dialog { border-radius: 16px !important; overflow: hidden; }
+
+/* cửa sổ hẹp: khung chat đè lên danh sách hội thoại, danh bạ đè lên menu danh bạ, panel tìm kiếm đè lên khung chat.
+   Nền trong suốt thì chữ lớp dưới lộ ra → dùng nền đặc pha sẵn ánh ambient (backdrop-filter không ăn ở các lớp này). */
+body.dark #sidebarNav.compact-mode ~ * main,
+body.dark .contact-pages.page-container,
+body.dark aside.search-message-panel-compact {
+  background:
+    radial-gradient(60% 45% at 85% 10%, rgba(0, 190, 255, 0.10), transparent 70%),
+    radial-gradient(60% 50% at 10% 90%, rgba(124, 92, 255, 0.16), transparent 70%),
+    radial-gradient(50% 40% at 90% 95%, rgba(255, 70, 170, 0.10), transparent 70%),
+    #0c0e1d !important;
+}
+
+/* cửa sổ hẹp: danh bạ (.contact-pages) đè lên menu danh bạ, panel tìm kiếm đè lên khung chat → cùng cần nền đặc.
+   lớp con (.search-message-inchat) cũng có nền mờ nên để trong suốt cho lộ nền đặc của cha. */
+body.dark aside.search-message-panel-compact .search-message-inchat { background: transparent !important; }
+
+/* cửa sổ hẹp: panel "Thông tin hội thoại" cũng đè lên khung chat */
+body.dark aside.compact-chat-info #chatInfo {
+  background: #101223 !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.45);
+}
+
+/* giờ gửi trong bubble bị Zalo đặt màu cứng #44546F → tối trên nền tối */
+.card-send-time,
+.card-send-time__sendTime {
+  color: var(--text-secondary) !important;
+}
+
+/* scrollbar mảnh */
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.14) !important; border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent !important; }

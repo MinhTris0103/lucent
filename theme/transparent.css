@@ -1,0 +1,15 @@
+/* Chế độ cửa sổ trong suốt (chưa dùng). Bật: thay khối "ambient" trong glass.css bằng file này + chạy install.sh với GLASS_TRANSPARENT=1 (chèn vibrancy.js). Các panel đè (compact) cần nền ~rgba(10,12,26,.94) thay vì gradient đặc. */
+/* ---------- nền: trong suốt, kính mờ do vibrancy ở main process (theme/vibrancy.js) ---------- */
+html {
+  background: transparent !important;
+}
+
+/* lớp tối phủ lên kính mờ để khớp màu vùng chat; chỉnh alpha cho sáng/tối */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgb(139, 120, 255, var(--zg-tint, 0.12));
+}

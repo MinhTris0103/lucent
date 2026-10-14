@@ -1,0 +1,97 @@
+/* Mochi: lớp fixed trên cùng, chỉ riêng con mèo nhận chuột để không che thao tác của khung chat. */
+#zg-pet { position: fixed; left: 0; top: 0; width: 36px; height: 32px; z-index: 10; pointer-events: none; will-change: transform; --lx: 0; --ly: 0; }
+#zg-pet.zp-in { animation: zp-in .35s ease-out; }
+@keyframes zp-in { from { opacity: 0; } }
+.zp-hop { width: 100%; height: 100%; pointer-events: auto; cursor: pointer; transform-origin: 50% 100%; }
+.zp-flip { width: 100%; height: 100%; transition: transform .15s; }
+.zp-sprite { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, .18)); }
+.zp-sprite * { transform-box: fill-box; }
+
+/* thở, vẫy đuôi, chớp mắt */
+.zp-body { transform-origin: 50% 100%; animation: zp-breathe 3.2s ease-in-out infinite; }
+@keyframes zp-breathe { 50% { transform: scaleY(1.035); } }
+.zp-tail { transform-origin: 0 100%; animation: zp-wag 1.6s ease-in-out infinite; }
+@keyframes zp-wag { 50% { transform: rotate(14deg); } }
+.zp-eyes { display: none; transform-origin: 50% 50%; }
+.zp-open { display: inline; animation: zp-blink 4.5s infinite; }
+@keyframes zp-blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
+/* ponytail: animation vô hạn khiến GPU ra frame 60fps liên tục (đo ~30% GPU lúc Zalo để yên) → thở/vẫy/chớp chỉ chạy khi rê chuột vào Mochi; đi/diễn trò có animation riêng nên không bị ảnh hưởng */
+.zp-body, .zp-tail, .zp-open { animation-play-state: paused; }
+#zg-pet:hover .zp-body, #zg-pet:hover .zp-tail, #zg-pet:hover .zp-open { animation-play-state: running; }
+.zp-pupil { transform: translate(calc(var(--lx) * 1px), calc(var(--ly) * 1px)); }
+
+/* trạng thái */
+#zg-pet.zp-joy .zp-open, #zg-pet.zp-asleep .zp-open { display: none; }
+#zg-pet.zp-joy .zp-happy, #zg-pet.zp-asleep .zp-sleep { display: inline; }
+#zg-pet.zp-asleep.zp-joy .zp-happy { display: none; }
+#zg-pet.zp-asleep .zp-tail { animation-duration: 5s; }
+#zg-pet.zp-asleep .zp-body { animation-duration: 5s; }
+#zg-pet.zp-mad .zp-body { filter: saturate(1.5) hue-rotate(-12deg); }
+#zg-pet.zp-mad .zp-tail { animation-duration: .35s; }
+
+/* đi: chân đổi nhịp, thân nhún */
+.zp-leg { transform-origin: 50% 0; }
+.zp-walk .zp-leg-a { animation: zp-step .32s ease-in-out infinite; }
+.zp-walk .zp-leg-b { animation: zp-step .32s ease-in-out -.16s infinite; }
+@keyframes zp-step { 50% { transform: translateY(-2.5px); } }
+.zp-walk .zp-body { animation: zp-bob .32s ease-in-out infinite; }
+@keyframes zp-bob { 50% { transform: translateY(-1.2px); } }
+.zp-jump { animation: zp-jump .45s cubic-bezier(.3, .7, .4, 1); }
+@keyframes zp-jump { 40% { transform: translateY(calc(-14px * var(--k, 1))) scale(.95, 1.08); } 80% { transform: translateY(0) scale(1.08, .9); } }
+
+/* bóng thoại */
+.zp-bubble {
+  position: absolute; bottom: calc(100% + 6px); left: 0; width: max-content; max-width: 190px; padding: 6px 10px; border-radius: 12px;
+  font: 12px/1.35 -apple-system, "SF Pro Text", "Segoe UI", system-ui, sans-serif; color: var(--text-primary); background: var(--surface-background-overlay);
+  border: 1px solid var(--border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: var(--shadow-overlay);
+  opacity: 0; transform: translateY(4px) scale(.96); transition: opacity .18s, transform .18s, visibility 0s .18s; pointer-events: none;
+  visibility: hidden; /* ẩn hẳn khi không nói: backdrop-filter của phần tử opacity:0 vẫn tốn GPU */
+}
+.zp-bubble.zp-show { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
+
+/* che tin nhắn: Mochi phóng to giữa cửa sổ (không nhận chuột để :hover của khung chat phía sau vẫn chạy); --k là hệ số phóng của sprite, bóng thoại to 2.5× */
+#zg-pet.zp-big { z-index: 11; will-change: auto; } /* will-change: transform giữ raster ở cỡ nhỏ → phóng to bị vỡ hạt */
+#zg-pet.zp-big .zp-hop { pointer-events: none; }
+#zg-pet.zp-big .zp-sprite { filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .22)); }
+#zg-pet.zp-big .zp-bubble { bottom: calc(100% + 24px); max-width: 475px; padding: 15px 25px; border-radius: 30px; font-size: 30px; }
+
+/* chạy lại gần + to lên (và ngược lại): nội suy vị trí và kích thước cùng lúc */
+#zg-pet.zp-anim { transition: transform .9s cubic-bezier(.45, 0, .2, 1), top .9s cubic-bezier(.45, 0, .2, 1), width .9s cubic-bezier(.45, 0, .2, 1), height .9s cubic-bezier(.45, 0, .2, 1); }
+#zg-pet.zp-anim .zp-leg-a, #zg-pet.zp-anim .zp-leg-b { animation-duration: .2s; }
+
+
+/* ponytail: animation của đạo cụ chỉ gắn khi gag tương ứng chạy; trước đây chạy ngầm cả khi display:none */
+/* trò bựa: đạo cụ ẩn sẵn, bật theo class zp-g-<tên> do pet.js đặt */
+.zp-prop, .zp-tear, .zp-stream, .zp-wail { display: none; }
+#zg-pet.zp-gag .zp-open, #zg-pet.zp-gag .zp-happy { display: none; }
+#zg-pet.zp-g-zap .zp-p-zap, #zg-pet.zp-g-gun .zp-p-gun, #zg-pet.zp-g-oxy .zp-p-oxy,
+#zg-pet.zp-g-gun .zp-tear, #zg-pet.zp-g-cry .zp-tear, #zg-pet.zp-g-cry .zp-stream, #zg-pet.zp-g-cry .zp-wail { display: inline; }
+#zg-pet.zp-g-zap .zp-x, #zg-pet.zp-g-faint .zp-x, #zg-pet.zp-g-gun .zp-sleep, #zg-pet.zp-g-oxy .zp-sleep, #zg-pet.zp-g-cry .zp-sleep { display: inline; }
+/* chích điện: giật bần bật, sáng loé, tia điện nhấp nháy */
+#zg-pet.zp-g-zap .zp-body { animation: zp-zap .09s linear infinite; }
+@keyframes zp-zap { 0% { transform: translate(-1.2px, 0); filter: brightness(1.7) saturate(1.4); } 50% { transform: translate(1.2px, -.8px); filter: none; } 100% { transform: translate(-1.2px, .4px); filter: brightness(1.7) saturate(1.4); } }
+#zg-pet.zp-g-zap .zp-bolt { animation: zp-flick .16s steps(2) infinite; } .zp-b2 { animation-delay: -.08s; } .zp-b3 { animation-delay: -.04s; }
+@keyframes zp-flick { 50% { opacity: 0; } }
+#zg-pet.zp-g-zap .zp-tail { animation: zp-wag .12s linear infinite; }
+/* chĩa súng: mèo chán đời, nghiêng đầu, rơi giọt nước mắt */
+#zg-pet.zp-g-gun .zp-body { animation: none; transform: rotate(-5deg); }
+#zg-pet.zp-g-gun .zp-tear, #zg-pet.zp-g-cry .zp-tear { animation: zp-drip 1.3s ease-in infinite; } .zp-t2 { animation-delay: -.65s; }
+@keyframes zp-drip { 0% { transform: translateY(-1px); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(9px); opacity: 0; } }
+/* thở oxy: mặt nạ phập phồng, thân thở gấp */
+#zg-pet.zp-g-oxy .zp-body { animation: zp-pant .8s ease-in-out infinite; }
+@keyframes zp-pant { 50% { transform: scale(1.04, 1.07); } }
+.zp-mask { transform-origin: 50% 50%; } #zg-pet.zp-g-oxy .zp-mask { animation: zp-mask .8s ease-in-out infinite; }
+@keyframes zp-mask { 50% { transform: scale(1.1); } }
+#zg-pet.zp-g-oxy .zp-fog { animation: zp-fog .8s ease-in-out infinite; }
+@keyframes zp-fog { 0%, 100% { opacity: 0; } 50% { opacity: .85; } }
+/* khóc lóc: nước mắt chảy thành dòng, nấc */
+#zg-pet.zp-g-cry .zp-body { animation: zp-sob .38s ease-in-out infinite; }
+@keyframes zp-sob { 50% { transform: translateY(-1.2px) scale(1.03, .96); } }
+.zp-stream { transform-origin: 50% 0; } #zg-pet.zp-g-cry .zp-stream { animation: zp-stream .45s ease-in-out infinite alternate; }
+@keyframes zp-stream { from { transform: scaleY(.6); } to { transform: scaleY(1); } }
+.zp-wail { transform-origin: 50% 50%; } #zg-pet.zp-g-cry .zp-wail { animation: zp-wail .38s ease-in-out infinite; }
+@keyframes zp-wail { 50% { transform: scaleY(.6); } }
+/* xỉu: ngã ngang ra sàn */
+.zp-sprite { transition: transform .25s cubic-bezier(.5, 0, .5, 1.4); transform-origin: 50% 100%; }
+#zg-pet.zp-g-faint .zp-sprite { transform: translateY(-18px) rotate(88deg); }
+#zg-pet.zp-g-faint .zp-tail, #zg-pet.zp-g-faint .zp-body { animation: none; }

@@ -1,0 +1,46 @@
+/* Chỉ áp khi bật "Album cuộn ngang" (body.zg-album, mặc định tắt = giao diện gốc của Zalo).
+   Nhóm ảnh kiểu Threads: lưới 2x2 → một dải ảnh to cuộn ngang. Zalo đặt kích thước bằng style inline nên phải !important.
+   Chỉ áp cho album ≥ 2 ảnh; bấm vào ảnh vẫn mở viewer như cũ. */
+body.zg-album #album-container:has(.album__item ~ .album__item) { height: auto !important; }
+
+body.zg-album .album:has(.album__item ~ .album__item) {
+  display: flex !important; gap: 6px; width: auto !important; height: auto !important;
+  max-width: clamp(316px, calc(100vw - 480px), 800px); /* 800px = max-width card ảnh của Zalo; co theo cửa sổ */
+  position: relative; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; scrollbar-width: none;
+}
+body.zg-album .album:has(.album__item ~ .album__item)::-webkit-scrollbar { display: none; }
+
+body.zg-album .album:has(.album__item ~ .album__item) > .album__item {
+  position: relative !important; left: auto !important; top: auto !important; flex: none; /* relative: giữ con tuyệt đối nằm trong ô, không làm tràn vùng cuộn */ scroll-snap-align: start;
+  width: clamp(110px, calc(250px * var(--ar, 0.75)), 316px) !important; height: 250px !important; border-radius: 12px !important; overflow: hidden;
+}
+/* mọi lớp bên trong cũng có width/height inline → ép theo khung cha */
+body.zg-album .album:has(.album__item ~ .album__item) > .album__item *:not([class*="video-message__floaty"], [class*="video-message__floaty"] *, [class*="video-message__play"], [class*="video-message__play"] *, [class*="__content__play"], [class*="__content__play"] *) { width: 100% !important; height: 100% !important; border-radius: 0 !important; }
+body.zg-album .album:has(.album__item ~ .album__item) > .album__item img { object-fit: cover !important; }
+/* giữ nguyên các nhãn nhỏ (HD, trạng thái) */
+body.zg-album .album:has(.album__item ~ .album__item) > .album__item :is(.qu-ba, .cloud-status, .cloud-status *) { width: auto !important; height: auto !important; }
+
+/* nút cuộn + chỉ báo số ảnh; chỉ hiện khi còn ảnh để xem về phía đó */
+.zg-ab, .zg-count { display: none; }
+body.zg-album #album-container:has(.album__item ~ .album__item) :is(.zg-ab, .zg-count) { display: flex; }
+.zg-ab {
+  position: absolute; top: 109px; z-index: 5; width: 32px; height: 32px; padding: 0; align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: 50%; cursor: pointer; color: var(--text-primary);
+  background: var(--surface-background-overlay);
+  box-shadow: var(--shadow-overlay); opacity: 0; pointer-events: none; transition: opacity .15s;
+}
+.zg-ab::before { content: ""; width: 8px; height: 8px; border: solid currentColor; border-width: 0 2px 2px 0; }
+.zg-ab-prev { left: 8px; } .zg-ab-prev::before { transform: translateX(2px) rotate(135deg); }
+.zg-ab-next { right: 8px; } .zg-ab-next::before { transform: translateX(-2px) rotate(-45deg); }
+#album-container.zg-prev .zg-ab-prev, #album-container.zg-next .zg-ab-next { opacity: .95; pointer-events: auto; }
+.zg-ab:hover { opacity: 1 !important; }
+.zg-count {
+  position: absolute; top: 8px; right: 8px; z-index: 5; padding: 2px 8px; border-radius: 10px; pointer-events: none;
+  font-size: 12px; font-weight: 500; color: #fff; background: rgba(0, 0, 0, .55);
+}
+
+/* badge HD: Zalo để chữ trắng trên nền xám nhạt → khó đọc ở light mode */
+.img-center-box .qu-ba { color: #fff !important; background: rgba(0, 0, 0, .55) !important; }
+
+/* nút thả react: Zalo đặt left theo bề rộng 450px cũ của album → neo về mép phải khung album mới */
+body.zg-album .message-action:has(.album__item ~ .album__item) > div:has(> .message-reaction-container) { left: auto !important; right: 4px; }

@@ -1,0 +1,21 @@
+/* lớp chữ OCR trong viewer ảnh (ocr.js): trong suốt, chỉ hiện khi bôi đen */
+.zg-ocr { position: fixed; z-index: 2147483000; container-type: size; pointer-events: none; }
+.zg-ocr-line {
+  position: absolute; display: flex; align-items: center; overflow: visible; pointer-events: auto;
+  color: transparent; text-shadow: none; -webkit-text-fill-color: transparent; line-height: 1; white-space: pre; cursor: text;
+  user-select: text; -webkit-user-select: text; animation: zg-ocr-flash 1.2s ease-out;
+}
+.zg-ocr-line span { text-shadow: none; display: inline-block; transform-origin: left center; }
+.zg-ocr-line::selection, .zg-ocr-line span::selection { background: rgba(139, 120, 255, 0.5); color: transparent; }
+@keyframes zg-ocr-flash { from { background: rgba(255, 214, 10, 0.4); } to { background: transparent; } }
+
+.zg-ocr-btn.on { color: #8b78ff; background: rgba(139, 120, 255, 0.18); }
+.zg-ocr-btn svg { width: 24px; height: 24px; }
+
+.zg-ocr-pill {
+  position: fixed; z-index: 2147483001; left: 50%; bottom: 84px; transform: translateX(-50%); padding: 8px 16px; border-radius: 999px;
+  font-size: 13px; color: #fff; background: rgba(30, 30, 36, 0.78); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); user-select: none;
+}
+.zg-ocr-pill.copy { cursor: pointer; }
+.zg-ocr-pill.copy:hover { background: rgba(139, 120, 255, 0.9); }

@@ -1,0 +1,134 @@
+/* Zalo Glass — bản sáng. Chỉ áp khi Zalo ở light mode; dark-base + glass dùng body.dark (xem install.sh).
+   Chữ/icon/viền giữ token gốc của Zalo, ở đây chỉ làm lớp kính + ambient. */
+
+body:not(.dark) {
+  --bg-default: transparent !important;
+  --title-bar: rgba(255, 255, 255, 0.45) !important;
+  --surface-background: rgba(255, 255, 255, 0.5) !important;
+  --surface-background-subtle: rgba(255, 255, 255, 0.35) !important;
+  --surface-background-overlay: rgba(255, 255, 255, 0.7) !important;
+  --surface-alt: rgba(255, 255, 255, 0.45) !important;
+  --layer-background: rgba(255, 255, 255, 0.55) !important;
+  --layer-background-subtle: rgba(255, 255, 255, 0.35) !important;
+  --layer-background-hover: rgba(110, 96, 255, 0.08) !important;
+  --layer-background-disabled: rgba(255, 255, 255, 0.3) !important;
+  --layer-background-selected: rgba(110, 96, 255, 0.16) !important;
+  --layer-background-CSC: rgba(255, 255, 255, 0.35) !important;
+  --layer-background-pinned: rgba(255, 255, 255, 0.4) !important;
+  --layer-background-leftmenu: rgba(255, 255, 255, 0.5) !important;
+  --layer-background-leftmenu-hover: rgba(110, 96, 255, 0.08) !important;
+  --layer-background-leftmenu-selected: rgba(110, 96, 255, 0.18) !important;
+  --layer-background-navbar-normal: rgba(255, 255, 255, 0.5) !important;
+  --layer-background-navbar-hover: rgba(110, 96, 255, 0.1) !important;
+  --layer-background-navbar-selected: rgba(110, 96, 255, 0.2) !important;
+  --layer-background-navbar-sublevel-normal: rgba(255, 255, 255, 0.4) !important;
+  --layer-background-navbar-sublevel-hover: rgba(110, 96, 255, 0.08) !important;
+  --layer-background-navbar-sublevel-selected: rgba(110, 96, 255, 0.16) !important;
+  --layer-neutral-information-background: rgba(255, 255, 255, 0.5) !important;
+  --background-inactiveness: rgba(255, 255, 255, 0.5) !important;
+  --item-wa-hover: rgba(110, 96, 255, 0.08) !important;
+  --item-wa-select: rgba(110, 96, 255, 0.16) !important;
+  --icon-hover-bg: rgba(110, 96, 255, 0.1) !important;
+  --reaction-background: rgba(255, 255, 255, 0.9) !important;
+  --timestamp: rgba(0, 0, 0, 0.05) !important;
+  --bg-message-info: rgba(255, 255, 255, 0.55) !important;
+
+  /* bubble chat */
+  --white-message: rgba(255, 255, 255, 0.78) !important;
+  --white-message-selected: rgba(255, 255, 255, 0.95) !important;
+  --white-quote: rgba(255, 255, 255, 0.55) !important;
+  --white-quote-selected: rgba(255, 255, 255, 0.75) !important;
+  --blue-message: rgba(110, 96, 255, 0.2) !important;
+  --blue-message-selected: rgba(110, 96, 255, 0.3) !important;
+  --blue-quote: rgba(255, 255, 255, 0.45) !important;
+  --blue-quote-selected: rgba(255, 255, 255, 0.6) !important;
+  --self-bubble-chat-shadow: rgba(0, 0, 0, 0) !important;
+  --shadow-bubble: 0 0 0 1px rgba(255, 255, 255, 0.7) inset, 0 3px 12px rgba(80, 70, 160, 0.12) !important;
+
+  /* input */
+  --input-white: rgba(255, 255, 255, 0.6) !important;
+  --input-grey: rgba(255, 255, 255, 0.55) !important;
+  --input-field-bg-filled: rgba(255, 255, 255, 0.6) !important;
+  --input-field-bg-filled-hover: rgba(255, 255, 255, 0.75) !important;
+  --input-field-bg-filled-pressed: rgba(255, 255, 255, 0.9) !important;
+  --input-field-bg-outline: rgba(255, 255, 255, 0.4) !important;
+  --input-field-bg-outline-hover: rgba(255, 255, 255, 0.6) !important;
+
+  /* viền + accent */
+  --border: rgba(60, 50, 140, 0.16) !important;
+  --border-subtle: rgba(60, 50, 140, 0.1) !important;
+  --divider: rgba(60, 50, 140, 0.1) !important;
+  --divider-subtle: rgba(60, 50, 140, 0.06) !important;
+  --border-focused: #6e60ff !important;
+  --link: #5848e6 !important;
+  --cta-link: #5848e6 !important;
+  --cta-link-primary: #5848e6 !important;
+  --text-mention: #5848e6 !important;
+  --button-primary-normal: #6e60ff !important;
+  --button-primary-hover: #5848e6 !important;
+  --button-primary-pressed: #4a3bd0 !important;
+  --button-primary-text: #ffffff !important;
+
+  --shadow-overlay: 0 0 0 1px rgba(255, 255, 255, 0.7) inset, 0 20px 50px rgba(60, 50, 140, 0.22) !important;
+  --curtain: rgba(30, 28, 70, 0.3) !important;
+  --toast: rgba(40, 38, 80, 0.85) !important;
+
+  /* sidebar: nền gốc của Zalo là xanh đậm nên icon mặc định màu trắng → đổi sang tím đậm */
+  --icon-navbar-normal: #4a4590 !important;
+  --icon-navbar-disabled: rgba(74, 69, 144, 0.4) !important;
+
+  background: transparent !important;
+}
+
+html:has(body:not(.dark)) { background: #eef0fb !important; }
+
+body:not(.dark)::before {
+  background:
+    radial-gradient(45% 50% at 12% 15%, rgba(150, 125, 255, 0.45), transparent 75%),
+    radial-gradient(45% 50% at 92% 8%, rgba(80, 200, 255, 0.35), transparent 75%),
+    radial-gradient(50% 45% at 80% 95%, rgba(255, 130, 200, 0.32), transparent 75%),
+    radial-gradient(40% 40% at 20% 90%, rgba(90, 230, 200, 0.25), transparent 75%);
+}
+
+body:not(.dark) :is(.zl-modal__dialog, .zmenu-body, .zmenu, .popover, .tooltip, .toast,
+  [class*="popover"], [class*="context-menu"], [class*="dropdown-menu"]) {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+body:not(.dark) #sidebarNav.compact-mode ~ * main,
+body:not(.dark) .contact-pages.page-container,
+body:not(.dark) aside.search-message-panel-compact {
+  background:
+    radial-gradient(60% 50% at 10% 90%, rgba(150, 125, 255, 0.2), transparent 70%),
+    radial-gradient(60% 45% at 85% 10%, rgba(80, 200, 255, 0.16), transparent 70%),
+    #f2f3fc !important;
+}
+
+body:not(.dark) aside.compact-chat-info #chatInfo {
+  background: #f4f5fd !important;
+  border-left-color: rgba(60, 50, 140, 0.12);
+  box-shadow: -12px 0 40px rgba(60, 50, 140, 0.15);
+}
+
+html:has(body:not(.dark)) ::-webkit-scrollbar-thumb { background: rgba(60, 50, 140, 0.25) !important; }
+
+/* pill ngày ("Hôm nay", "T6 09/10/2026"): Zalo để chữ trắng, nền kính sáng thì không đọc được */
+body:not(.dark) .chat-date.--time .content { color: var(--text-secondary) !important; }
+
+body:not(.dark) aside.search-message-panel-compact .search-message-inchat { background: transparent !important; }
+
+/* pill trạng thái tin nhắn ("Đã gửi"): cùng lỗi chữ trắng trên nền sáng; giữ trắng cho trạng thái lỗi (nền đỏ) */
+body:not(.dark) .bubble-message-status:not(.--error) { color: var(--text-secondary) !important; }
+
+/* toast ("Cập nhật phân loại thành công"): Zalo để chữ trắng, nền kính sáng thì không đọc được */
+body:not(.dark) :is(.toast, [class*="toast"]), body:not(.dark) :is(.toast, [class*="toast"]) * { color: var(--text-primary) !important; }
+
+/* toast-v2 ("Đã chia sẻ tin nhắn"): hộp nền --toast tối + chữ tối ở trên → đổi sang nền kính sáng như các lớp nổi khác */
+body:not(.dark) .toast-v2 .toast-content:not(.no-background) {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-overlay);
+}

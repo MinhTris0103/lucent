@@ -1,0 +1,151 @@
+/* Che tin nhắn (port từ ZaDark) ở danh sách hội thoại: thay nội dung bằng "••••", rê chuột vào dòng thì hiện lại.
+   JS bật từng class zg-hide-msg / zg-hide-name / zg-hide-avatar lên body. Chạy cả 2 mode. */
+
+body.zg-hide-msg :is(.conv-message, .z-conv-message, .conv-item-message),
+body.zg-hide-name :is(.conv-item-title__name, .conv-title-name) { font-size: 0 !important; }
+
+body.zg-hide-msg :is(.conv-message, .z-conv-message, .conv-item-message)::after,
+body.zg-hide-name :is(.conv-item-title__name, .conv-title-name)::after {
+  content: "••••••••";
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+body.zg-hide-avatar .conv-item .zavatar > * { visibility: hidden; }
+body.zg-hide-avatar .conv-item .zavatar { background: var(--layer-background-hover); border-radius: 50%; }
+
+body.zg-hide-msg .conv-item:hover :is(.conv-message, .z-conv-message, .conv-item-message),
+body.zg-hide-name .conv-item:hover :is(.conv-item-title__name, .conv-title-name) { font-size: revert !important; }
+body.zg-hide-msg .conv-item:hover :is(.conv-message, .z-conv-message, .conv-item-message)::after,
+body.zg-hide-name .conv-item:hover :is(.conv-item-title__name, .conv-title-name)::after { content: none; }
+body.zg-hide-avatar .conv-item:hover .zavatar > * { visibility: visible; }
+
+/* mục trong sidebar + menu */
+#zg-nav { cursor: pointer; opacity: 0.7; color: var(--icon-navbar-normal); }
+#zg-nav:hover, #zg-nav.on { opacity: 1; }
+#zg-nav svg { width: 24px; height: 24px; }
+
+/* hộp thoại tuỳ chọn, theo phong cách hộp Cài đặt của Zalo: lớp phủ #zg-menu bao hộp .zg-dlg (tiêu đề / nội dung cuộn / chân trang) */
+#zg-menu { position: fixed; inset: 0; z-index: 99999; display: none; align-items: center; justify-content: center; background: var(--curtain); }
+#zg-menu.open { display: flex; }
+#zg-menu .zg-dlg {
+  display: flex; flex-direction: column; width: 406px; max-width: calc(100vw - 32px); max-height: calc(100vh - 64px);
+  border-radius: 16px; color: var(--text-primary); font-size: 14px; overflow: hidden;
+  background: #fafafe; box-shadow: 0 8px 32px rgba(0, 0, 0, .25); /* đặc, không trong suốt */
+}
+body.dark #zg-menu .zg-dlg { background: #22262b; }
+#zg-menu header { display: flex; align-items: center; justify-content: space-between; padding: 16px 16px 4px 24px; }
+#zg-menu h2 { margin: 0; font-size: 18px; font-weight: 600; }
+#zg-menu .zg-x { display: flex; width: 32px; height: 32px; padding: 4px; border: 0; border-radius: 8px; cursor: pointer; color: var(--text-primary); background: transparent; }
+#zg-menu .zg-x:hover { background: var(--layer-background-hover); }
+#zg-menu .zg-x svg { width: 100%; height: 100%; }
+#zg-menu .zg-body { flex: 1; min-height: 0; overflow-y: auto; padding: 4px 16px 8px; }
+/* tiêu đề mục = dòng menu của Zalo: icon 20px + chữ 16px */
+#zg-menu section { padding: 4px 0; }
+#zg-menu section + section { border-top: 1px solid var(--border); }
+#zg-menu .zg-h { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 8px; font-size: 15px; white-space: nowrap; font-weight: 600; }
+#zg-menu .zg-h svg { flex: none; width: 20px; height: 20px; }
+#zg-menu .zg-h select { min-width: 0;
+  margin-left: auto; padding: 6px 28px 6px 12px; border: 1px solid var(--border); border-radius: 8px; font: inherit; font-size: 14px; font-weight: 400; cursor: pointer;
+  color: var(--text-primary); background-color: transparent; outline: 0;
+}
+#zg-menu .zg-h select option { color: #081c36; background: #fff; }
+#zg-menu label { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 40px; padding: 0 8px 0 40px; border-radius: 8px; cursor: pointer; font-size: 14px; color: var(--text-primary); }
+#zg-menu label:hover { background: var(--layer-background-hover); }
+/* checkbox → công tắc */
+#zg-menu input[type=checkbox] { appearance: none; -webkit-appearance: none; flex: none; position: relative; width: 36px; height: 20px; margin: 0; border-radius: 10px; cursor: pointer; background: var(--border); transition: background .15s; }
+#zg-menu input[type=checkbox]::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .15s; }
+#zg-menu input[type=checkbox]:checked { background: var(--button-primary-normal, #6e60ff); }
+#zg-menu input[type=checkbox]:checked::after { transform: translateX(16px); }
+#zg-menu footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 24px 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+#zg-menu footer[hidden] { display: none; }
+#zg-menu footer.dirty { color: var(--text-primary); }
+#zg-menu footer button { flex: none; padding: 6px 14px; border: 0; border-radius: 8px; cursor: pointer; font: inherit; color: var(--text-primary); background: var(--layer-background-hover); }
+#zg-menu footer.dirty button { color: var(--button-primary-text, #fff); background: var(--button-primary-normal, #6e60ff); }
+
+/* focus của dòng hội thoại khi điều hướng bằng phím (keys.js) */
+.conv-item:focus { outline: 2px solid #8b78ff; outline-offset: -2px; }
+.zg-msg-focus { outline: 2px solid #8b78ff; outline-offset: 3px; border-radius: 12px; }
+.share-msg__conv-item.zg-row { outline: 2px solid #8b78ff; outline-offset: -2px; border-radius: 10px; }
+
+/* gợi ý phím tắt ngay trong 2 nút của hộp thoại Chia sẻ (keys.js xử lý phím) */
+.zl-modal__dialog:has(.share-msg__conv-item) .zl-modal__footer__button::after {
+  margin-left: 8px; padding: 1px 6px; border-radius: 5px; font-size: 11px; font-weight: 500; opacity: 0.75;
+  background: rgba(127, 127, 127, 0.22);
+}
+.zl-modal__dialog:has(.share-msg__conv-item) .zl-modal__footer__button.btn-neutral::after { content: "Esc"; }
+.zl-modal__dialog:has(.share-msg__conv-item) .zl-modal__footer__button.btn-primary::after { content: "Ctrl↵"; background: rgba(255, 255, 255, 0.28); }
+
+/* bảng cảm xúc khi bấm E ở chế độ duyệt tin (keys.js): đánh số 1–6 dưới mỗi emoji */
+.reaction-emoji-list.zg-pick .reaction-emoji-icon { position: relative; }
+.reaction-emoji-list.zg-pick .reaction-emoji-icon::after {
+  content: attr(data-zg); position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
+  min-width: 14px; padding: 0 3px; border-radius: 5px; font-size: 10px; line-height: 14px; text-align: center;
+  color: #fff; background: #8b78ff;
+}
+
+/* che trong khung chat: chữ → dấu chấm (như sidebar), ảnh/album → khung trắng, avatar → làm mờ. Rê chuột vào bất cứ đâu trong khung chat (#chatViewContainer) thì hiện hết;
+   riêng tin đang chọn bằng phím (zg-msg-focus) luôn hiện để đọc được khi chuột nằm ngoài. */
+/* giữ nguyên layout: nội dung thật vẫn nằm trong luồng (chỉ ẩn/trong suốt), dấu chấm vẽ đè lên bằng absolute → kích thước tin không đổi, không giật */
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.text-message__container, .file-message__container, .link-message) { position: relative; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.text-message__container, .file-message__container, .link-message) > * { visibility: hidden !important; }
+body.zg-hide-cname #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-sender-name-content,
+body.zg-hide-cname #chatViewContainer:not(:hover) :is(.header-title, .subtitle__label) { position: relative; color: transparent !important; text-shadow: none !important; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.text-message__container, .file-message__container, .link-message)::after,
+body.zg-hide-cname #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-sender-name-content::after,
+body.zg-hide-cname #chatViewContainer:not(:hover) :is(.header-title, .subtitle__label)::after {
+  content: "••••••••"; position: absolute; left: 0; top: 0; letter-spacing: 1px; color: var(--text-secondary); font-size: 15px; line-height: inherit; pointer-events: none; text-shadow: none;
+}
+body.zg-hide-cname #chatViewContainer:not(:hover) .header-title::after { font-size: 18px; }
+
+/* ảnh preview của link + tiêu đề hộp thoại: ẩn con bằng visibility (vẫn giữ chỗ) */
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus):has(:is(.link-message, [class*="link-"], [class*="-link"])) :is(img, picture, video, canvas, [class*="thumb"], [class*="preview"]) { visibility: hidden !important; }
+body.zg-hide-cname #chatViewContainer:not(:hover) :is(.header-title, .subtitle__label) > * { visibility: hidden !important; }
+
+/* tin ghim, mốc giờ giữa các tin, "Đã nhận", ô nhập (placeholder có tên người nhận): làm mờ / thay dấu chấm, không đổi kích thước */
+body.zg-hide-cmsg #chatViewContainer:not(:hover) :is(.chat-group-topic__item, .chat-date .content, .bubble-message-status) { filter: blur(7px); }
+body.zg-hide-cname #chatViewContainer:not(:hover) #richInput.empty::before { content: "••••••••"; letter-spacing: 1px; }
+
+body.zg-hide-cimg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.img-msg-v2, .album) { background: #f3f4fa url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b3b9cf' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='3'/%3E%3Ccircle cx='9' cy='10' r='1.8'/%3E%3Cpath d='M3 17l5-4.5 4 3.5 3-2.5 6 4.5'/%3E%3C/svg%3E") center / 44px no-repeat !important; border-radius: 12px; box-shadow: var(--shadow-bubble); }
+body.zg-hide-cimg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.img-msg-v2, .album) * { visibility: hidden !important; }
+body.zg-hide-cimg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.zg-ab, .zg-count) { display: none !important; }
+body.zg-hide-cname #chatViewContainer:not(:hover) :is(.avatar--overlay, .threadChat__avatar) { filter: blur(7px); }
+body.zg-hide-cname :is(.avatar--overlay, .threadChat__avatar) { transition: filter .15s; }
+
+/* cửa sổ xem ảnh (popup-viewer): ảnh chính, dải thumbnail và avatar người gửi; rê chuột vào từng ảnh để xem */
+body.zg-hide-view :is(img.zimg-el, img.a-child) { filter: blur(24px); transition: filter .15s; }
+body.zg-hide-view img.a-child { filter: blur(8px); }
+body.zg-hide-view :is(img.zimg-el, img.a-child):hover { filter: none; }
+
+/* tin file: icon file có visibility riêng nên lọt qua lớp che → thay bằng ô trắng; chấm vẽ ở cột tên file thay vì góc khung (đè lên icon) */
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .file-message__container::after { content: none; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .file-message__container .file-tit-box { visibility: visible !important; background: #f3f4fa; border-radius: 8px; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .file-message__container .file-tit-box * { visibility: hidden !important; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .file-message__container .file-message__content { position: relative; visibility: visible !important; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .file-message__container .file-message__content > * { visibility: hidden !important; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .file-message__container .file-message__content::after { content: "••••••••"; position: absolute; left: 0; top: 0; letter-spacing: 1px; color: var(--text-secondary); font-size: 15px; line-height: 1.5; pointer-events: none; }
+
+/* tin có trích dẫn (reply): chấm vẽ trong cột chữ (cạnh thumbnail) thay vì góc khung; thumbnail → ô trắng, giữ chỗ */
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-quote-fragment__container > * { visibility: hidden !important; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-quote-fragment__icon-wrapper { visibility: visible !important; background: #f3f4fa url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b3b9cf' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='3'/%3E%3Ccircle cx='9' cy='10' r='1.8'/%3E%3Cpath d='M3 17l5-4.5 4 3.5 3-2.5 6 4.5'/%3E%3C/svg%3E") center / 22px no-repeat; border-radius: 3px; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-quote-fragment__icon-wrapper * { visibility: hidden !important; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-quote-fragment__content-container { position: relative; visibility: visible !important; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-quote-fragment__content-container > * { visibility: hidden !important; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-quote-fragment__content-container::after { content: "••••••••"; position: absolute; left: 0; top: 0; letter-spacing: 1px; color: var(--text-secondary); font-size: 15px; line-height: 1.5; pointer-events: none; }
+/* nội dung chữ của tin reply nằm cạnh khối quote: chấm vẽ ở dòng chữ, không vẽ ở góc ngoài cùng */
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .text-message__container:has(.message-quote-fragment__container)::after { content: none; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .text-message__container:has(.message-quote-fragment__container) > div:not(.message-quote-fragment__container) { position: relative; visibility: visible !important; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .text-message__container:has(.message-quote-fragment__container) > div:not(.message-quote-fragment__container) > * { visibility: hidden !important; }
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .text-message__container:has(.message-quote-fragment__container) > div:not(.message-quote-fragment__container)::after { content: "••••••••"; position: absolute; left: 0; top: 0; letter-spacing: 1px; color: var(--text-secondary); font-size: 15px; line-height: 22px; pointer-events: none; }
+
+/* sticker: giữ chỗ bằng skeleton như ảnh; badge giờ nổi của tin ảnh/sticker → làm mờ */
+body.zg-hide-cimg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .sticker-message-content-wrapper { background: #f3f4fa url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b3b9cf' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='3'/%3E%3Ccircle cx='9' cy='10' r='1.8'/%3E%3Cpath d='M3 17l5-4.5 4 3.5 3-2.5 6 4.5'/%3E%3C/svg%3E") center / 44px no-repeat; border-radius: 12px; box-shadow: var(--shadow-bubble); }
+body.zg-hide-cimg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .sticker-message-content-wrapper * { visibility: hidden !important; }
+body.zg-hide-cimg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus):has(:is(.img-msg-v2, .album, .sticker-message-content-wrapper)) .message-content-send-time-floating { filter: blur(7px); }
+
+/* icon Google Meet tự vẽ bằng SVG trong menu "..." */
+.zg-meet .menu-icon { display: inline-flex; align-items: center; justify-content: center; }
+.zg-meet .menu-icon svg { width: 24px; height: 24px; }
+
+html.zg-mac .zl-modal__dialog:has(.share-msg__conv-item) .zl-modal__footer__button.btn-primary::after { content: "⌘↵"; }
