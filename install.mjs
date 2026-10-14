@@ -28,7 +28,7 @@ const locate = () => {
   }
   const roots = env ? [env] : WIN ? [path.join(process.env.LOCALAPPDATA || "", "Programs/Zalo")] : ["/opt/Zalo", "/opt/zalo", "/usr/lib/zalo"];
   for (const r of roots) {
-    const dirs = [r, ...(fs.existsSync(r) ? fs.readdirSync(r).filter((n) => /^Zalo-/i.test(n)).sort().reverse().map((n) => path.join(r, n)) : [])];
+    const dirs = [r, ...(fs.existsSync(r) ? fs.readdirSync(r).filter((n) => /^Zalo-/i.test(n)).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map((n) => path.join(r, n)) : [])];
     for (const d of dirs) if (fs.existsSync(path.join(d, "resources/app.asar"))) return { res: path.join(d, "resources"), key: path.basename(d) };
   }
   die("Không tìm thấy Zalo. Đặt ZALO_APP=<thư mục chứa resources/app.asar>.");
