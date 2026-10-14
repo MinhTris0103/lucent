@@ -1,4 +1,4 @@
-# ZaGlass
+# Lucent
 
 Theme kính mờ (glassmorphism) cho Zalo PC trên macOS, Windows và Linux. Cài bằng cách chèn CSS/JS vào `app.asar` của Zalo, cùng cách với ZaDark. Không cần cài Node: nếu máy không có thì script chạy bằng chính Electron của Zalo.
 
