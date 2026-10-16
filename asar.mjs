@@ -13,7 +13,14 @@ export function patchAsar(src, dst, edits) {
   const d = fs.readFileSync(src), n = d.readUInt32LE(12), base = 8 + d.readUInt32LE(4);
   const hdr = JSON.parse(d.toString("utf8", 16, 16 + n));
   const tail = []; let off = d.length - base;
-  for (const [p, fn] of Object.entries(edits)) {
+  const all = [];
+  for (const [p, fn] of Object.entries(edits)) { // khoá có "*" ở tên file (vd "pc-dist/lazy/*.js"): áp fn cho mọi file khớp, fn trả falsy thì bỏ qua
+    if (!p.includes("*")) { all.push([p, fn]); continue; }
+    const parts = p.split("/"), re = new RegExp("^" + parts.pop().replace(/[.]/g, "\\.").replace(/\*/g, ".*") + "$");
+    let dir = hdr; for (const s of parts) dir = dir.files[s];
+    for (const f of Object.keys(dir.files)) if (re.test(f)) all.push([[...parts, f].join("/"), fn]);
+  }
+  for (const [p, fn] of all) {
     const parts = p.split("/"), name = parts.pop();
     let dir = hdr; for (const s of parts) dir = dir.files[s];
     const old = dir.files[name];
