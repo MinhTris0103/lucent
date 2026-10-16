@@ -14,6 +14,8 @@ body.zg-hide-name :is(.conv-item-title__name, .conv-title-name)::after {
 
 /* emoji/ảnh nhỏ trong dòng xem trước có kích thước cố định nên lọt qua font-size:0 → ẩn riêng */
 body.zg-hide-msg .conv-item:not(:hover) :is(.conv-message, .z-conv-message, .conv-item-message) :is(.emoji-sizer, img) { visibility: hidden; }
+/* dòng "ai đó đã thả cảm xúc" (tim + tên người thả) ở danh sách */
+body.zg-hide-msg .conv-item:not(:hover) .conv-unread-react { visibility: hidden; }
 body.zg-hide-avatar .conv-item .zavatar > * { visibility: hidden; }
 body.zg-hide-avatar .conv-item .zavatar { background: var(--layer-background-hover); border-radius: 50%; }
 

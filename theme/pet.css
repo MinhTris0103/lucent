@@ -47,6 +47,8 @@
   opacity: 0; transform: translateY(4px) scale(.96); transition: opacity .18s, transform .18s, visibility 0s .18s; pointer-events: none;
   visibility: hidden; /* ẩn hẳn khi không nói: backdrop-filter của phần tử opacity:0 vẫn tốn GPU */
 }
+/* #zg-pet nằm dưới <html> nên không thừa kế token của body.dark → tự đặt màu tối cho bóng thoại */
+html:has(body.dark) .zp-bubble { color: #eef0f8; background: rgba(14, 16, 32, .85); border-color: rgba(255, 255, 255, .12); box-shadow: 0 8px 24px rgba(0, 0, 0, .45); }
 .zp-bubble.zp-show { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
 
 /* che tin nhắn: Mochi phóng to giữa cửa sổ (không nhận chuột để :hover của khung chat phía sau vẫn chạy); --k là hệ số phóng của sprite, bóng thoại to 2.5× */
