@@ -38,5 +38,5 @@ Do not work from this file alone for these tasks. The docs contain exact formats
 - Keep it lazy: no unrequested abstraction or config. A deliberate shortcut with a known limit gets a `// ponytail: <limit and upgrade path>` comment.
 - Match surrounding style: terse Vietnamese comments explaining why; long single lines are fine in data tables.
 - User-visible change (env var, option, module, feature) → update `README.md` (Vietnamese).
-- Commits: short Vietnamese subject on the user-visible change, like `git log`. No AI attribution trailers.
+- Commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `perf:`, …) with a short English subject on the user-visible change, like `git log`. No AI attribution trailers.
 - Do not commit machine files (`.DS_Store`, anything under `~/.zalo-glass*`).
