@@ -65,9 +65,9 @@ body.dark #zg-menu .zg-dlg { background: #22262b; }
 #zg-menu footer.dirty button { color: var(--button-primary-text, #fff); background: var(--button-primary-normal, #6e60ff); }
 
 /* focus của dòng hội thoại khi điều hướng bằng phím (keys.js) */
-.conv-item:focus { outline: 2px solid #8b78ff; outline-offset: -2px; }
-.zg-msg-focus { outline: 2px solid #8b78ff; outline-offset: 3px; border-radius: 12px; }
-.share-msg__conv-item.zg-row { outline: 2px solid #8b78ff; outline-offset: -2px; border-radius: 10px; }
+.conv-item:focus { outline: 2px solid rgb(var(--zg-accent)); outline-offset: -2px; }
+.zg-msg-focus { outline: 2px solid rgb(var(--zg-accent)); outline-offset: 3px; border-radius: 12px; }
+.share-msg__conv-item.zg-row { outline: 2px solid rgb(var(--zg-accent)); outline-offset: -2px; border-radius: 10px; }
 
 /* gợi ý phím tắt ngay trong 2 nút của hộp thoại Chia sẻ (keys.js xử lý phím) */
 .zl-modal__dialog:has(.share-msg__conv-item) .zl-modal__footer__button::after {
@@ -82,7 +82,7 @@ body.dark #zg-menu .zg-dlg { background: #22262b; }
 .reaction-emoji-list.zg-pick .reaction-emoji-icon::after {
   content: attr(data-zg); position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
   min-width: 14px; padding: 0 3px; border-radius: 5px; font-size: 10px; line-height: 14px; text-align: center;
-  color: #fff; background: #8b78ff;
+  color: #fff; background: rgb(var(--zg-accent));
 }
 
 /* che trong khung chat: chữ → dấu chấm (như sidebar), ảnh/album → khung trắng, avatar → làm mờ. Rê chuột vào bất cứ đâu trong khung chat (#chatViewContainer) thì hiện hết;

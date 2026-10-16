@@ -80,14 +80,14 @@ body:not(.dark) {
   background: transparent !important;
 }
 
-html:has(body:not(.dark)) { background: #eef0fb !important; }
+html:has(body:not(.dark)) { background: var(--zg-bg-l) !important; }
 
 body:not(.dark)::before {
   background:
-    radial-gradient(45% 50% at 12% 15%, rgba(150, 125, 255, 0.45), transparent 75%),
-    radial-gradient(45% 50% at 92% 8%, rgba(80, 200, 255, 0.35), transparent 75%),
-    radial-gradient(50% 45% at 80% 95%, rgba(255, 130, 200, 0.32), transparent 75%),
-    radial-gradient(40% 40% at 20% 90%, rgba(90, 230, 200, 0.25), transparent 75%);
+    radial-gradient(45% 50% at 12% 15%, var(--zg-l1), transparent 75%),
+    radial-gradient(45% 50% at 92% 8%, var(--zg-l2), transparent 75%),
+    radial-gradient(50% 45% at 80% 95%, var(--zg-l3), transparent 75%),
+    radial-gradient(40% 40% at 20% 90%, var(--zg-l4), transparent 75%);
 }
 
 body:not(.dark) :is(.zl-modal__dialog, .zmenu-body, .zmenu, .popover, .tooltip, .toast,

@@ -12,22 +12,22 @@ body {
   --layer-background-subtle: rgba(255, 255, 255, 0.035) !important;
   --layer-background-hover: rgba(255, 255, 255, 0.08) !important;
   --layer-background-disabled: rgba(255, 255, 255, 0.03) !important;
-  --layer-background-selected: rgba(139, 120, 255, 0.22) !important;
+  --layer-background-selected: rgb(var(--zg-accent) / 0.22) !important;
   --layer-background-CSC: rgba(255, 255, 255, 0.035) !important;
   --layer-background-pinned: rgba(255, 255, 255, 0.04) !important;
   --layer-background-leftmenu: rgba(8, 10, 22, 0.45) !important;
   --layer-background-leftmenu-hover: rgba(255, 255, 255, 0.08) !important;
-  --layer-background-leftmenu-selected: rgba(139, 120, 255, 0.28) !important;
+  --layer-background-leftmenu-selected: rgb(var(--zg-accent) / 0.28) !important;
   --layer-background-navbar-normal: rgba(8, 10, 22, 0.45) !important;
   --layer-background-navbar-hover: rgba(255, 255, 255, 0.1) !important;
-  --layer-background-navbar-selected: rgba(139, 120, 255, 0.3) !important;
+  --layer-background-navbar-selected: rgb(var(--zg-accent) / 0.3) !important;
   --layer-background-navbar-sublevel-normal: rgba(255, 255, 255, 0.04) !important;
   --layer-background-navbar-sublevel-hover: rgba(255, 255, 255, 0.08) !important;
-  --layer-background-navbar-sublevel-selected: rgba(139, 120, 255, 0.22) !important;
+  --layer-background-navbar-sublevel-selected: rgb(var(--zg-accent) / 0.22) !important;
   --layer-neutral-information-background: rgba(255, 255, 255, 0.05) !important;
   --background-inactiveness: rgba(12, 14, 28, 0.38) !important;
   --item-wa-hover: rgba(255, 255, 255, 0.08) !important;
-  --item-wa-select: rgba(139, 120, 255, 0.22) !important;
+  --item-wa-select: rgb(var(--zg-accent) / 0.22) !important;
   --icon-hover-bg: rgba(255, 255, 255, 0.1) !important;
   --reaction-background: rgba(30, 32, 52, 0.85) !important;
   --timestamp: rgba(255, 255, 255, 0.06) !important;
@@ -97,7 +97,7 @@ body {
   --button-secondary-neutral-pressed: rgba(255, 255, 255, 0.05) !important;
   --button-secondary-neutral-text: #eef0f8 !important;
   --button-tertiary-neutral-hover: rgba(255, 255, 255, 0.1) !important;
-  --button-tertiary-primary-hover: rgba(139, 120, 255, 0.18) !important;
+  --button-tertiary-primary-hover: rgb(var(--zg-accent) / 0.18) !important;
 
   --shadow-overlay: 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 20px 50px rgba(0, 0, 0, 0.45) !important;
   --curtain: rgba(4, 5, 12, 0.45) !important;
@@ -107,8 +107,15 @@ body {
 }
 
 /* ---------- ambient ---------- */
+/* mặc định của theme Glass; template khác (templates.js) ghi đè các biến này lên <html> */
+:root {
+  --zg-accent: 139 120 255;
+  --zg-bg-d: #070814; --zg-bg-l: #eef0fb;
+  --zg-d1: rgba(124, 92, 255, 0.42); --zg-d2: rgba(0, 190, 255, 0.28); --zg-d3: rgba(255, 70, 170, 0.26); --zg-d4: rgba(40, 220, 190, 0.18); --zg-d5: rgba(90, 110, 255, 0.16);
+  --zg-l1: rgba(150, 125, 255, 0.45); --zg-l2: rgba(80, 200, 255, 0.35); --zg-l3: rgba(255, 130, 200, 0.32); --zg-l4: rgba(90, 230, 200, 0.25);
+}
 html {
-  background: #070814 !important;
+  background: var(--zg-bg-d) !important;
 }
 
 /* ponytail: ambient tĩnh. Bản animation (trôi + blur) ăn ~50% CPU liên tục lúc Zalo để yên → bỏ. */
@@ -119,11 +126,11 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(45% 50% at 12% 15%, rgba(124, 92, 255, 0.42), transparent 75%),
-    radial-gradient(45% 50% at 92% 8%, rgba(0, 190, 255, 0.28), transparent 75%),
-    radial-gradient(50% 45% at 80% 95%, rgba(255, 70, 170, 0.26), transparent 75%),
-    radial-gradient(40% 40% at 20% 90%, rgba(40, 220, 190, 0.18), transparent 75%),
-    radial-gradient(35% 35% at 55% 50%, rgba(90, 110, 255, 0.16), transparent 75%);
+    radial-gradient(45% 50% at 12% 15%, var(--zg-d1), transparent 75%),
+    radial-gradient(45% 50% at 92% 8%, var(--zg-d2), transparent 75%),
+    radial-gradient(50% 45% at 80% 95%, var(--zg-d3), transparent 75%),
+    radial-gradient(40% 40% at 20% 90%, var(--zg-d4), transparent 75%),
+    radial-gradient(35% 35% at 55% 50%, var(--zg-d5), transparent 75%);
 }
 
 /* ---------- kính cho lớp nổi (menu, modal, popover, toast) ---------- */

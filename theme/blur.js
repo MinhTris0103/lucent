@@ -10,6 +10,7 @@
     img: ICON('<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M3 17l5-4.5 4 3.5 3-2.5 6 4.5"/>'),
     album: ICON('<rect x="3" y="6" width="14" height="12" rx="2"/><path d="M20 8v8M7 3h10"/>'),
     pet: ICON('<circle cx="8" cy="8" r="1.7"/><circle cx="16" cy="8" r="1.7"/><circle cx="5" cy="13" r="1.7"/><circle cx="19" cy="13" r="1.7"/><path d="M12 12c-3 0-5 3-5 5 0 1.5 1.5 2 3 1.5 1.3-.4 2.7-.4 4 0 1.5.5 3 0 3-1.5 0-2-2-5-5-5z"/>'),
+    theme: ICON('<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/>'),
     perf: ICON('<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>'),
   };
   const GROUPS = [
@@ -17,9 +18,10 @@
     ["Ẩn trong hội thoại", I.chat, [["cmsg", "Nội dung tin nhắn"], ["cimg", "Ảnh / album"], ["cname", "Tên & avatar"]]],
     ["Ẩn khi xem ảnh", I.img, [["view", "Ảnh, thumbnail, người gửi"]]],
     ["Hiển thị ảnh trong hội thoại", I.album, "album"], // select: Mặc định (dạng gốc của Zalo) | Cuộn ngang
-    ["Pet (Mochi)", I.pet, [["pet", "Hiện Mochi"], ["petbig", "Phóng to Mochi khi đang che"]]], // Hiện Mochi mặc định bật, Phóng to mặc định tắt; pet.js đọc class zg-pet-off / zg-pet-big
+    ["Giao diện", I.theme, "@theme"], // select template theme / pet (templates.js)
+    ["Pet", I.pet, [["pet", "Hiện pet"], ["petbig", "Phóng to pet khi đang che"]]], // Hiện pet mặc định bật, Phóng to mặc định tắt; pet.js đọc class zg-pet-off / zg-pet-big
   ];
-  const OPTS = GROUPS.flatMap(([, , o]) => (Array.isArray(o) ? o : [["album"]])), PET = ["pet", "petbig", "album"], isOn = (k) => (k === "pet" ? st[k] !== false : !!st[k]); // chỉ "pet" mặc định bật
+  const OPTS = GROUPS.flatMap(([, , o]) => (Array.isArray(o) ? o : o === "album" ? [["album"]] : [])), PET = ["pet", "petbig", "album"], isOn = (k) => (k === "pet" ? st[k] !== false : !!st[k]); // chỉ "pet" mặc định bật
   const svg = (extra) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>${extra}</svg>`;
   const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
   let st = load();
@@ -75,11 +77,23 @@
     GROUPS.forEach(([title, icon, opts]) => {
       const sec = document.createElement("section"), h = sech(icon, title);
       sec.append(h);
+      if (opts[0] === "@") { // select template: theme ở tiêu đề nhóm, pet nằm cuối nhóm Pet bên dưới
+        const kind = opts.slice(1), s = document.createElement("select"); s.dataset.tpl = kind;
+        s.innerHTML = Object.entries(__zg.THEMES).map(([k, t]) => `<option value="${k}">${t.name}</option>`).join(""); s.value = __zg.get().theme;
+        s.onchange = () => __zg.set(kind, s.value);
+        h.append(s); body.append(sec); return;
+      }
       if (!Array.isArray(opts)) { // select Mặc định / Cuộn ngang
         const s = document.createElement("select");
         s.dataset.k = opts; s.innerHTML = '<option value="">Mặc định</option><option value="1">Cuộn ngang</option>'; s.value = isOn(opts) ? "1" : "";
         s.onchange = () => { st[opts] = !!s.value; try { localStorage.setItem(KEY, JSON.stringify(st)); } catch {} render(); };
         h.append(s); body.append(sec); return;
+      }
+      if (title === "Pet") { // chọn loại pet
+        const s = document.createElement("select"); s.dataset.tpl = "pet";
+        s.innerHTML = Object.entries(__zg.PETS).map(([k, t]) => `<option value="${k}">${t.name}</option>`).join(""); s.value = __zg.get().pet;
+        s.onchange = () => __zg.set("pet", s.value);
+        h.append(s);
       }
       opts.forEach(([k, label]) => {
         const l = document.createElement("label");
@@ -109,6 +123,7 @@
     render();
   };
 
+  addEventListener("zg-tpl", () => menu?.querySelectorAll("select[data-tpl]").forEach((s) => (s.value = __zg.get()[s.dataset.tpl])));
   addEventListener("storage", (e) => {
     if (e.key !== KEY) return;
     st = load(); render();

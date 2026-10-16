@@ -77,7 +77,7 @@ if (!fs.existsSync(path.join(BACKUP, "app.asar")) || !patched(ASAR)) {
 // token dark chỉ áp khi Zalo ở dark mode (body.dark); light mode dùng glass-light.css
 const dark = (f) => read(f).replace(/^body \{/gm, "body.dark {");
 const css = [dark("dark-base.css"), dark("glass.css"), ...["glass-light", "blur", "album", "ocr", "pet"].map((n) => read(n + ".css")), process.env.GLASS_TRANSPARENT === "1" && MAC ? read("transparent.css") : ""].join("\n");
-const js = (process.env.GLASS_JS || "blur album keys ocr pet meet").split(/\s+/).map((j) => read(j + ".js")).join("\n");
+const js = ["templates", ...(process.env.GLASS_JS || "blur album keys ocr pet meet").split(/\s+/)].map((j) => read(j + ".js")).join("\n");
 // connect-src thêm 127.0.0.1:47831 cho OCR (ocr-main.js)
 const inject = (b) => b && b.toString().replace("</head>", '<link rel="stylesheet" href="zalo-glass.css"><script src="zalo-glass.js" defer></script></head>').replace("connect-src 'self'", "connect-src 'self' http://127.0.0.1:47831");
 

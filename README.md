@@ -21,8 +21,12 @@ Zalo tự cập nhật sẽ ghi đè bản patch, chỉ cần chạy lại scrip
 | Biến | Ý nghĩa |
 |---|---|
 | `ZALO_APP` | Thư mục cài Zalo, nếu không nằm ở chỗ mặc định |
-| `GLASS_JS` | Danh sách module JS bật, mặc định `"blur album keys ocr pet meet"` |
+| `GLASS_JS` | Danh sách module JS bật, mặc định `"blur album keys ocr pet meet"` (`templates` luôn được nạp đầu tiên) |
 | `GLASS_TRANSPARENT=1` | Cửa sổ trong suốt (chỉ macOS, thử nghiệm) |
+
+## Theme và pet (template)
+
+Chọn trong app: nút con mắt ở sidebar → "Giao diện" (theme) và "Pet" (loại pet), đổi tức thì, lưu theo từng máy. Thêm template mới trong [theme/templates.js](theme/templates.js): theme là một mục trong `THEMES` (ghi đè biến `--zg-*`), pet là một mục trong `PETS` (gọi `fill(...)` đổi màu/tai/lời thoại, hoặc tự viết `svg` theo hợp đồng class `zp-*`).
 
 ## Ghi chú
 
