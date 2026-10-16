@@ -93,7 +93,10 @@ else if (spawnSync("tesseract", ["--version"], { stdio: "ignore" }).status !== 0
 const pre = read("opts-main.js") + "\n" + read("ocr-main.js") + "\n" + (MAC && process.env.GLASS_TRANSPARENT === "1" ? read("vibrancy.js") + "\n" : "");
 const edits = { "pc-dist/zalo-glass.css": () => css, "pc-dist/zalo-glass.js": () => js, "bootstrap.js": (b) => pre + b, "pc-dist/index.html": inject };
 // Zalo có sẵn FPS monitor (chunk lazy) chạy 2 vòng requestAnimationFrame ~100 lần/giây khi cờ enable_fps_monitor bật → compositor/GPU không bao giờ ngủ. Đổi tên cờ để nó luôn tắt.
-edits["pc-dist/lazy/*.js"] = (b) => b && b.includes("enable_fps_monitor") && b.toString().replace(/\.(enable_fps_monitor(?:_v2)?|enable_for_staging_account)/g, ".zg_off_$1");
+// Lỗi của Zalo: className thanh nav ghép `(showChat?" show-chat":"")+(update?"show-update-btn":"")` thiếu dấu cách → khi có nút cập nhật, "show-chat" thành "show-chatshow-update-btn" và ở chế độ hẹp bấm hội thoại không mở được chat. Thêm dấu cách + thêm showChat vào deps của useMemo.
+const navFix = (t) => t.replace(/\(([a-z])\?"show-update-btn":""\)\+\(([a-z])\?"show-update-btn":""\)\}\),\[([a-z])\.compactLv,/g, '($1?" show-update-btn":"")+($2?" show-update-btn":"")}),[$3.showChat,$3.compactLv,');
+edits["pc-dist/lazy/*.js"] = (b) => { if (!b) return false; let t = b.toString(); if (t.includes("enable_fps_monitor")) t = t.replace(/\.(enable_fps_monitor(?:_v2)?|enable_for_staging_account)/g, ".zg_off_$1"); t = navFix(t); return t !== b.toString() && t; };
+edits["pc-dist/compact-app-pc.*.js"] = (b) => { if (!b) return false; const t = navFix(b.toString()); return t !== b.toString() && t; };
 edits["pc-dist/popup-viewer.html"] = inject; // bản Zalo không có file này thì bỏ qua
 const hash = patchAsar(path.join(BACKUP, "app.asar"), ASAR, edits); // luôn build từ backup
 if (MAC) { // ElectronAsarIntegrity = sha256 của chuỗi JSON header trong asar
