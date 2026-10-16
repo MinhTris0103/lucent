@@ -115,8 +115,10 @@ body.zg-hide-cname #chatViewContainer:not(:hover) .message-view__typing::before 
 body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.text-message__container, .file-message__container, .link-message)::after,
 body.zg-hide-cname #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-sender-name-content::after,
 body.zg-hide-cname #chatViewContainer:not(:hover) :is(.header-title, .subtitle__label)::after {
-  content: "••••••••"; position: absolute; left: 0; top: 0; letter-spacing: 1px; color: var(--text-secondary); font-size: 15px; line-height: inherit; pointer-events: none; text-shadow: none;
+  content: "••••••••"; position: absolute; left: 0; top: 0; letter-spacing: 1px; color: var(--text-secondary); font-size: 15px; line-height: inherit; pointer-events: none; text-shadow: none; white-space: nowrap;
 }
+/* bong bóng tin ngắn hẹp hơn dãy chấm: cắt bớt chấm thay vì tràn ra ngoài */
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .text-message__container { overflow: hidden; }
 body.zg-hide-cname #chatViewContainer:not(:hover) .header-title::after { font-size: 18px; }
 
 /* ảnh preview của link + tiêu đề hộp thoại: ẩn con bằng visibility (vẫn giữ chỗ) */
@@ -126,7 +128,7 @@ body.zg-hide-cname #chatViewContainer:not(:hover) :is(.header-title, .subtitle__
 /* badge/pill (giờ, ngày, trạng thái, react…): ẩn hẳn, vẫn giữ chỗ */
 body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.undo-message, .card-send-time__sendTime, .message-time-status, .message-content-send-time-wrapper, .reacts-list),
 body.zg-hide-cimg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus):has(:is(.img-msg-v2, .album, .video-message__non-caption-wrapper, .video-message__w-caption-wrapper, .file-video-message, .sticker-message-content-wrapper)) .message-content-send-time-floating,
-body.zg-hide-cmsg #chatViewContainer:not(:hover) :is(.chat-group-topic__item, .chat-date .content, .bubble-message-status, .reacts-list) { visibility: hidden !important; } /* .reacts-list nằm ngoài [id^="bb_msg_id"] nên không dùng chung selector với nhóm trên */
+body.zg-hide-cmsg #chatViewContainer:not(:hover) :is(.chat-group-topic__item, .chat-date .content, .bubble-message-status, .reacts-list, .msg-reaction-icon) { visibility: hidden !important; } /* .reacts-list nằm ngoài [id^="bb_msg_id"] nên không dùng chung selector với nhóm trên */
 
 body.zg-hide-cname #chatViewContainer:not(:hover) #richInput.empty::before { content: "••••••••"; letter-spacing: 1px; }
 
