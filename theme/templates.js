@@ -85,6 +85,62 @@
   const MAD = ["Thôi nha! Mình giận á 😾", "Chọc nữa là mình nghỉ việc đó!", "Hứ! Mình đi nộp đơn xin nghỉ đây", "Đủ rồi, mình lên HR báo cáo bạn 📋"];
   const fill = (n, p, l) => ({ ...animal(p), name: n, typing: TYPING, mad: MAD, gags: GAGS, ...l });
 
+  // Luffy chibi: mây thay đuôi, chân dép và bốn bộ mắt dùng lại hành vi pet có sẵn.
+  const LUFFY_GEAR5 = `
+    <g class="zp-tail" fill="#fff" stroke="#b9c8da" stroke-width=".7" stroke-linejoin="round">
+      <path d="M8 26 C-2 25 -3 17 2 15 C-2 12 1 7 5 10 C7 11 6 14 4 13 C1 17 5 20 10 20Z"/>
+    </g>
+    <g class="zp-leg zp-leg-a" stroke="#634c50" stroke-width=".7">
+      <path d="M13 28h6l-1 5h-5z" fill="#fff"/>
+      <path d="M13 32h4v2h-5z" fill="#edb18a"/>
+      <path d="M11.5 34h6.5v1.3h-7z" fill="#b78146"/>
+      <path d="m13 33 2 1 1-1" fill="none"/>
+    </g>
+    <g class="zp-leg zp-leg-b" stroke="#634c50" stroke-width=".7">
+      <path d="M22 28h6l-1 5h-5z" fill="#fff"/>
+      <path d="M23 32h4l1 2h-5z" fill="#edb18a"/>
+      <path d="M22 34h6.5l1 1.3H22z" fill="#b78146"/>
+      <path d="m24 33 1 1 1-1" fill="none"/>
+    </g>
+    <g class="zp-body" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 21Q20 18 29 21l1 9H10Z" fill="#fff" stroke="#a9bcd2" stroke-width=".75"/>
+      <path d="M16 21h8l2 8H14Z" fill="#f2ba92"/>
+      <path d="m17 23 6 4m0-4-6 4" stroke="#c47768" stroke-width=".9"/>
+      <path d="m12 21 5-.5-2 6-4 1m17-6-5-.5 2 6 4 1" fill="#fff" stroke="#d0ddea" stroke-width=".7"/>
+      <path d="M11 28q9 2 18 0v3q-9 2-18 0Z" fill="#a079cf" stroke="#755294" stroke-width=".65"/>
+      <path d="m27 30 5 1-2 5-3-1 1-3-3-1Z" fill="#b78ee3" stroke="#755294" stroke-width=".65"/>
+      <path d="M11 22 8 25l3 2m18-5 3 3-3 2" fill="none" stroke="#edb18a" stroke-width="3.2"/>
+      <circle cx="11" cy="26.5" r="1.8" fill="#f2ba92" stroke="#bf8269" stroke-width=".6"/>
+      <circle cx="29" cy="26.5" r="1.8" fill="#f2ba92" stroke="#bf8269" stroke-width=".6"/>
+      <path d="M9 22C3 24 2 18 6 17c-1-4 4-5 6-2q8-4 16 0c3-3 7-1 6 2 5 1 3 7-2 6l-3-3q-9-4-18 0Z" fill="#fff" stroke="#b9c8da" stroke-width=".75"/>
+      <path d="M6 19q-1 3 3 2m22-3q4-1 3 2" fill="none" stroke="#d2dfed" stroke-width=".8"/>
+      <ellipse cx="10.2" cy="12.5" rx="2" ry="2.7" fill="#edb18a" stroke="#bf8269" stroke-width=".65"/>
+      <ellipse cx="29.8" cy="12.5" rx="2" ry="2.7" fill="#edb18a" stroke="#bf8269" stroke-width=".65"/>
+      <path d="M10.5 10C10 0 30 0 29.5 10v5C29 24 11 24 10.5 15Z" fill="#f5c39c" stroke="#bf8269" stroke-width=".75"/>
+      <path d="M10 11C5 11 5 6 8 5 4 1 8-3 12-2c0-4 6-6 9-2 4-5 10-2 10 1 6-1 8 5 4 7 3 4-1 8-6 7l-1-4c-3 2-5 0-6-2-1 4-5 5-8 3l-2 3Z" fill="#fff" stroke="#b9c8da" stroke-width=".8"/>
+      <path d="M10 4c-3-3 3-6 5-3s-1 5-3 3m6-6c4-3 8 2 4 4-2 1-3-1-2-2m7 2c1-4 7-2 5 1m-16 3q3 1 4-2" fill="none" stroke="#d2dfed" stroke-width=".8"/>
+      <g fill="none" stroke="#fff" stroke-width="1.5">
+        <path d="M12.5 10q3-4 5-1c1 2-2 2-2 .5m6-.5q3-4 5-1c1 2-2 2-2 .5"/>
+      </g>
+      <g class="zp-eyes zp-open">
+        <ellipse cx="15.7" cy="12.5" rx="2.7" ry="2.4" fill="#fff" stroke="#634c50" stroke-width=".5"/>
+        <ellipse cx="24.3" cy="12.5" rx="2.7" ry="2.4" fill="#fff" stroke="#634c50" stroke-width=".5"/>
+        <g class="zp-pupil"><g fill="#cc4667" stroke="#63394f" stroke-width=".45"><circle cx="15.7" cy="12.5" r="1.15"/><circle cx="24.3" cy="12.5" r="1.15"/></g>
+          <g fill="#35283f"><circle cx="15.7" cy="12.5" r=".45"/><circle cx="24.3" cy="12.5" r=".45"/></g></g>
+      </g>
+      <g class="zp-eyes zp-happy" fill="none" stroke="#63404b" stroke-width="1.1"><path d="M13 13q2.7-4 5.4 0m3.2 0q2.7-4 5.4 0"/></g>
+      <g class="zp-eyes zp-x" fill="none" stroke="#63404b" stroke-width="1.1"><path d="m14 11 3.4 3.4m0-3.4L14 14.4m8.6-3.4 3.4 3.4m0-3.4-3.4 3.4"/></g>
+      <g class="zp-eyes zp-sleep" fill="none" stroke="#63404b" stroke-width="1"><path d="M13 13q2.7 2 5.4 0m3.2 0q2.7 2 5.4 0"/></g>
+      <path d="M12 15.5h4m-3-1v2m2-2v2" fill="none" stroke="#bf8269" stroke-width=".6"/>
+      <path d="M13 16q7 2 14 0-1 6-7 6t-7-6Z" fill="#fff" stroke="#874f4b" stroke-width=".75"/>
+      <path d="M14 18.5q6 1.6 12 0m-6-1v4" fill="none" stroke="#d0b2a3" stroke-width=".5"/>
+      <g class="zp-tears" fill="#5cc8ff">
+        <rect class="zp-stream" x="14.8" y="14.5" width="1.2" height="7" rx=".6"/><rect class="zp-stream zp-s2" x="23.7" y="14.5" width="1.2" height="7" rx=".6"/>
+        <path class="zp-tear" d="M12 14q-2 3 0 4 2-1 0-4Z"/><path class="zp-tear zp-t2" d="M28 14q-2 3 0 4 2-1 0-4Z"/>
+        <ellipse class="zp-wail" cx="20" cy="18.5" rx="3.5" ry="2.5" fill="#874f4b"/>
+      </g>
+    </g>`;
+
   const PETS = {
     mochi: fill("Mochi", { fur: "#ffb26b", dark: "#f59a4a", belly: "#ffe3c4", inner: "#ff9fb0", cheek: "#ff8aa0", ears: CAT_EARS, mark: STRIPES }, {
       intro: "Mochi đi làm rồi nè, chưa gì đã muốn về ✨",
@@ -105,6 +161,24 @@
       intro: "Bông tới rồi nè, mang theo cà rốt 🥕",
       lines: ["Nhảy một cái cho tỉnh táo nào 🐰", "Cà rốt là động lực, deadline là… cà rốt hết hạn", "Bông không trốn việc, Bông chỉ nhảy đi chỗ khác thôi", "Nhắn lại người ta đi, đừng để họ chờ như cà rốt héo",
         "Uống nước nha, Bông nhắc đó 💧", "Làm tí nghỉ tí, sống lâu như thỏ (tầm 10 năm)", "Tai Bông nghe hết, nhưng Bông giả vờ không nghe 🙉", "Ăn rau chưa? Chưa thì ăn đi 🥬"] }),
+    luffygear5: {
+      name: "Luffy Gear 5", svg: LUFFY_GEAR5,
+      intro: "Gear 5 tới rồi, cười lên nào! ☁️",
+      lines: [
+        "Xong task này rồi đi kiếm thịt nha! 🍖", "Deadline căng quá, kéo giãn nó ra được không? 😆",
+        "Thuyền trưởng đang canh thanh chat nè! 🏴‍☠️", "Tóc trắng rồi, còn task vẫn chưa xong! ☁️",
+        "Nghỉ một nhịp rồi mình phiêu lưu tiếp! 🥁", "Kho báu hôm nay là nút gửi đúng giờ! ✨",
+        "Bụng réo to hơn cả trống giải phóng rồi! 🍖", "Gomu Gomu no… gửi tin nhắn! 💬",
+        "Cười một cái cho nhẹ đầu nào! 😁", "Đồng đội ơi, uống nước rồi làm tiếp! 💧",
+        "Đi họp cũng là một chuyến phiêu lưu hả? 🧭", "Hết ca rồi, giương buồm về thôi! ⛵",
+      ],
+      typing: ["Gõ xong rồi chia mình miếng thịt nha! 🍖", "Viết từ từ thôi, thuyền trưởng đợi được! 😁", "Tin nhắn này dài bằng cả hải trình nè! 🧭"],
+      mad: ["Chọc hoài, mình giãn tay lấy thịt đó! 🍖", "Thuyền trưởng đổi chỗ đây, nhột quá! 😆", "Để mình cười lấy hơi cái đã! ☁️"],
+      gags: {
+        cry: [3500, ["Ai ăn mất phần thịt của mình rồi! 😭", "Huhu, đi họp mà không có đồ ăn! 🍖"]],
+        faint: [3200, ["Hết thịt là thuyền trưởng hết pin! 💤", "Gear 5 nghỉ tí, lát quậy tiếp! ☁️"]],
+      },
+    },
   };
 
   // ---- chọn + áp dụng ----

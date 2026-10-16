@@ -28,6 +28,8 @@ Zalo tự cập nhật sẽ ghi đè bản patch, chỉ cần chạy lại scrip
 
 Chọn trong app: nút con mắt ở sidebar → "Giao diện" (theme) và "Pet" (loại pet), đổi tức thì, lưu theo từng máy. Thêm template mới trong [theme/templates.js](theme/templates.js): theme là một mục trong `THEMES` (ghi đè biến `--zg-*`), pet là một mục trong `PETS` (gọi `fill(...)` đổi màu/tai/lời thoại, hoặc tự viết `svg` theo hợp đồng class `zp-*`).
 
+Pet **Luffy Gear 5** là fan art SVG chibi với tóc trắng xoăn, vòng mây quanh vai, đai tím và dép. Chọn nút con mắt → "Pet" → "Luffy Gear 5"; pet có lời thoại tiếng Việt riêng và dùng các hành vi đi bộ, nhảy, vui, ngủ, giận, khóc và hết pin có sẵn. Nếu đã cài Lucent, chạy lại script cài đặt từ bản mã nguồn có pet này rồi mở lại Zalo để thấy lựa chọn mới.
+
 ## Ghi chú
 
 - OCR: macOS dùng Vision (cần Xcode Command Line Tools để biên dịch `ocr.swift`), Windows dùng `ocr.ps1`, Linux cần `tesseract` + `tesseract-ocr-vie`.
