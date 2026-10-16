@@ -176,3 +176,6 @@ body.dark aside.compact-chat-info #chatInfo {
 /* scrollbar mảnh */
 ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.14) !important; border-radius: 8px; }
 ::-webkit-scrollbar-track { background: transparent !important; }
+
+/* Màn hình khoá của Zalo phủ bằng --layer-background (ở đây gần trong suốt) → lộ danh sách chat; cho nền đặc */
+body.dark .app-lock { background: #0b0d1c !important; }

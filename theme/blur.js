@@ -17,9 +17,9 @@
     ["Ẩn trong hội thoại", I.chat, [["cmsg", "Nội dung tin nhắn"], ["cimg", "Ảnh / album"], ["cname", "Tên & avatar"]]],
     ["Ẩn khi xem ảnh", I.img, [["view", "Ảnh, thumbnail, người gửi"]]],
     ["Hiển thị ảnh trong hội thoại", I.album, "album"], // select: Mặc định (dạng gốc của Zalo) | Cuộn ngang
-    ["Pet (Mochi)", I.pet, [["pet", "Hiện Mochi"], ["petbig", "Phóng to Mochi khi đang che"]]], // mặc định bật; pet.js đọc class zg-pet-off / zg-pet-big
+    ["Pet (Mochi)", I.pet, [["pet", "Hiện Mochi"], ["petbig", "Phóng to Mochi khi đang che"]]], // Hiện Mochi mặc định bật, Phóng to mặc định tắt; pet.js đọc class zg-pet-off / zg-pet-big
   ];
-  const OPTS = GROUPS.flatMap(([, , o]) => (Array.isArray(o) ? o : [["album"]])), PET = ["pet", "petbig", "album"], isOn = (k) => (k !== "album" && PET.includes(k) ? st[k] !== false : !!st[k]);
+  const OPTS = GROUPS.flatMap(([, , o]) => (Array.isArray(o) ? o : [["album"]])), PET = ["pet", "petbig", "album"], isOn = (k) => (k === "pet" ? st[k] !== false : !!st[k]); // chỉ "pet" mặc định bật
   const svg = (extra) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>${extra}</svg>`;
   const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
   let st = load();
@@ -37,16 +37,21 @@
   };
 
   // Nhóm "Hiệu năng": đọc/ghi qua server localhost ở main process (ocr-main.js ↔ opts-main.js), áp dụng khi mở lại Zalo
-  const PERF = [["ram", "Giảm RAM (low-end mode)"], ["noUpdate", "Tắt tự cập nhật"], ["throttle", "Giảm tải khi ẩn / thu nhỏ"], ["lazyNoti", "Hoãn nạp cửa sổ thông báo"], ["noCap", "Tắt ZaloCap (chụp màn hình)"], ["noCall", "Tắt ZaloCall (gọi thoại / video)"]];
+  const PERF = [["ram", "Giảm RAM (low-end mode)"], ["noUpdate", "Tắt tự cập nhật"], ["throttle", "Giảm tải khi ẩn / thu nhỏ"], ["lazyNoti", "Hoãn nạp cửa sổ thông báo"], ["noCap", "Tắt ZaloCap (chụp màn hình)", "Khi tắt ZaloCap, Zalo không dán (paste) được ảnh/file từ clipboard vào khung chat. Cần dán ảnh/file thì đừng bật mục này."], ["noCall", "Tắt ZaloCall (gọi thoại / video)"]];
   const API = "http://127.0.0.1:47831/config";
   const sech = (icon, title) => { const h = document.createElement("div"); h.className = "zg-h"; h.innerHTML = icon; h.append(title); return h; };
   const perf = async () => {
     try {
       const cfg = await (await fetch(API)).json(), box = document.createElement("section");
       box.append(sech(I.perf, "Hiệu năng"));
-      PERF.forEach(([k, label]) => {
+      PERF.forEach(([k, label, tip]) => {
         const l = document.createElement("label");
         l.innerHTML = `<span>${label}</span><input type="checkbox">`;
+        if (tip) { // (i) rê chuột / bấm để xem giải thích
+          const i = Object.assign(document.createElement("i"), { className: "zg-i", textContent: "i", tabIndex: 0 });
+          i.dataset.tip = tip; i.onclick = (e) => e.preventDefault();
+          l.firstChild.append(i);
+        }
         const c = l.lastChild; c.checked = !!cfg[k];
         c.onchange = () => { fetch(`${API}?set=${k}&v=${+c.checked}`).catch(() => {}); foot.classList.add("dirty"); };
         box.append(l);

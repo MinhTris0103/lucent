@@ -92,6 +92,9 @@ body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-f
 body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.text-message__container, .file-message__container, .link-message) > * { visibility: hidden !important; }
 body.zg-hide-cname #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-sender-name-content,
 body.zg-hide-cname #chatViewContainer:not(:hover) :is(.header-title, .subtitle__label) { position: relative; color: transparent !important; text-shadow: none !important; }
+/* "<tên> đang soạn tin" cũng lộ tên → che chữ, giữ nguyên con mèo/dấu chấm */
+body.zg-hide-cname #chatViewContainer:not(:hover) .message-view__typing, body.zg-hide-cname #chatViewContainer:not(:hover) .message-view__typing * { color: transparent !important; text-shadow: none !important; }
+body.zg-hide-cname #chatViewContainer:not(:hover) .message-view__typing::before { content: "•••••••• đang soạn tin"; position: absolute; left: 12px; color: var(--text-secondary); font-size: .75rem; pointer-events: none; }
 body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.text-message__container, .file-message__container, .link-message)::after,
 body.zg-hide-cname #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) .message-sender-name-content::after,
 body.zg-hide-cname #chatViewContainer:not(:hover) :is(.header-title, .subtitle__label)::after {
@@ -149,3 +152,10 @@ body.zg-hide-cimg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-f
 .zg-meet .menu-icon svg { width: 24px; height: 24px; }
 
 html.zg-mac .zl-modal__dialog:has(.share-msg__conv-item) .zl-modal__footer__button.btn-primary::after { content: "⌘↵"; }
+
+/* (i) giải thích cạnh một tuỳ chọn: rê chuột hoặc bấm (focus) để hiện */
+#zg-menu label:has(.zg-i) { position: relative; }
+#zg-menu .zg-i { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; margin-left: 8px; border: 1.5px solid currentColor; border-radius: 50%; font: italic 600 11px/1 serif; opacity: .6; cursor: help; outline: none; vertical-align: middle; }
+#zg-menu .zg-i:hover, #zg-menu .zg-i:focus { opacity: 1; }
+#zg-menu .zg-i::after { content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 4px); left: 40px; right: 8px; box-sizing: border-box; padding: 8px 10px; border-radius: 8px; background: #081c36; color: #fff; font: 400 12.5px/1.4 system-ui, sans-serif; white-space: normal; z-index: 10; }
+#zg-menu .zg-i:hover::after, #zg-menu .zg-i:focus::after { display: block; }

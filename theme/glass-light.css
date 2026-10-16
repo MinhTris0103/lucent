@@ -132,3 +132,6 @@ body:not(.dark) .toast-v2 .toast-content:not(.no-background) {
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: var(--shadow-overlay);
 }
+
+/* Màn hình khoá: nền đặc, không để lộ chat phía sau */
+body:not(.dark) .app-lock { background: #eef0fa !important; }
