@@ -201,8 +201,9 @@
   let pokes = 0, pokeT = 0;
   sprite.addEventListener("click", async (e) => {
     if (T.forms?.length > 1) {
-      if (big || anim || !reg || document.hidden || !document.hasFocus()) return;
+      if (anim || document.hidden || !document.hasFocus()) return;
       activity();
+      if (big || !reg) { hop(); say(pick(T.lines)); return; } // đang phóng to thì chỉ nhảy + nói như pet khác, chưa tung chiêu
       if (e.shiftKey) { cancelGag(); changeForm(); return; }
       const attack = T.forms[form].attack;
       if (activeGag === attack) return; // click dồn không khởi động lại chiêu đang diễn

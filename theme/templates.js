@@ -86,6 +86,7 @@
   const fill = (n, p, l) => ({ ...animal(p), name: n, typing: TYPING, mad: MAD, gags: GAGS, ...l });
 
   // Màu nhân vật giữ riêng để nhận ra áo đỏ, mũ rơm và Haki trên mọi theme.
+  // ponytail: màu nhân vật cố định, không theo --zg-* (Gear 5 còn hex trực tiếp); muốn đổi theo theme thì chuyển hết sang biến --zg-luffy-*.
   const LUFFY_PALETTE = "--zg-luffy-skin:#f5c39c;--zg-luffy-hot:#eb9d91;--zg-luffy-red:#cf3345;--zg-luffy-blue:#4388c5;--zg-luffy-straw:#e6bc64;--zg-luffy-ink:#332a32;--zg-luffy-haki:#181725;--zg-luffy-white:#fff9ee";
   const luffyArm = (side, haki = false, giant = false) => {
     const s = side === "l" ? -1 : 1, skin = haki ? "var(--zg-luffy-haki)" : "var(--zg-luffy-skin)";
