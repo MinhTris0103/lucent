@@ -12,6 +12,8 @@ body.zg-hide-name :is(.conv-item-title__name, .conv-title-name)::after {
   color: var(--text-secondary);
 }
 
+/* emoji/ảnh nhỏ trong dòng xem trước có kích thước cố định nên lọt qua font-size:0 → ẩn riêng */
+body.zg-hide-msg .conv-item:not(:hover) :is(.conv-message, .z-conv-message, .conv-item-message) :is(.emoji-sizer, img) { visibility: hidden; }
 body.zg-hide-avatar .conv-item .zavatar > * { visibility: hidden; }
 body.zg-hide-avatar .conv-item .zavatar { background: var(--layer-background-hover); border-radius: 50%; }
 
@@ -118,6 +120,7 @@ body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-f
 body.zg-hide-cname #chatViewContainer:not(:hover) :is(.header-title, .subtitle__label) > * { visibility: hidden !important; }
 
 /* tin ghim, mốc giờ giữa các tin, "Đã nhận", ô nhập (placeholder có tên người nhận): làm mờ / thay dấu chấm, không đổi kích thước */
+body.zg-hide-cmsg #chatViewContainer:not(:hover) [id^="bb_msg_id"]:not(.zg-msg-focus) :is(.card--undo > span, .card-send-time__sendTime, .message-time-status, .message-content-send-time-wrapper) { filter: blur(7px); }
 body.zg-hide-cmsg #chatViewContainer:not(:hover) :is(.chat-group-topic__item, .chat-date .content, .bubble-message-status) { filter: blur(7px); }
 body.zg-hide-cname #chatViewContainer:not(:hover) #richInput.empty::before { content: "••••••••"; letter-spacing: 1px; }
 

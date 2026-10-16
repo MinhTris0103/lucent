@@ -114,6 +114,9 @@
     const s = load(), t = THEMES[s.theme] || THEMES.glass, root = document.documentElement.style;
     keys.forEach((k) => root.removeProperty(k));
     Object.entries(t.vars).forEach(([k, v]) => root.setProperty(k, v));
+    // Chromium của Electron 22 chưa có color-mix() → tính sẵn các sắc độ của --zg-primary (d = pha đen, l = pha trắng; số = % giữ lại màu gốc)
+    const c = t.vars["--zg-primary"].split(" ").map(Number);
+    [["d", 80], ["d", 66], ["l", 55], ["l", 78], ["l", 38]].forEach(([k, p]) => root.setProperty(`--zg-p-${k}${p}`, c.map((x) => Math.round(x * p / 100 + (k === "l" ? 255 * (100 - p) / 100 : 0))).join(" ")));
     dispatchEvent(new Event("zg-tpl"));
   };
   const zg = globalThis.__zg = { THEMES, PETS, get: () => load(), set: (k, v) => { try { localStorage.setItem(KEY, JSON.stringify({ ...load(), [k]: v })); } catch {} apply(); } };

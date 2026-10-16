@@ -72,25 +72,25 @@ body {
   --icon-primary: #e6e9f5 !important;
   --icon-secondary: #a7aec6 !important;
   --icon-navbar-normal: #e6e9f5 !important;
-  --icon-navbar-sublevel-normal: color-mix(in srgb, rgb(var(--zg-primary)) 55%, #fff) !important;
-  --icon-navbar-sublevel-selected: color-mix(in srgb, rgb(var(--zg-primary)) 38%, #fff) !important;
+  --icon-navbar-sublevel-normal: rgb(var(--zg-p-l55)) !important;
+  --icon-navbar-sublevel-selected: rgb(var(--zg-p-l38)) !important;
 
   /* viền */
   --border: rgba(255, 255, 255, 0.12) !important;
   --border-subtle: rgba(255, 255, 255, 0.08) !important;
   --border-hover: rgba(255, 255, 255, 0.18) !important;
-  --border-focused: color-mix(in srgb, rgb(var(--zg-primary)) 55%, #fff) !important;
+  --border-focused: rgb(var(--zg-p-l55)) !important;
   --divider: rgba(255, 255, 255, 0.07) !important;
   --divider-subtle: rgba(255, 255, 255, 0.04) !important;
 
   /* accent */
   --link: #8fa8ff !important;
-  --cta-link: color-mix(in srgb, rgb(var(--zg-primary)) 55%, #fff) !important;
-  --cta-link-primary: color-mix(in srgb, rgb(var(--zg-primary)) 55%, #fff) !important;
-  --text-mention: color-mix(in srgb, rgb(var(--zg-primary)) 55%, #fff) !important;
+  --cta-link: rgb(var(--zg-p-l55)) !important;
+  --cta-link-primary: rgb(var(--zg-p-l55)) !important;
+  --text-mention: rgb(var(--zg-p-l55)) !important;
   --button-primary-normal: rgb(var(--zg-primary)) !important;
-  --button-primary-hover: color-mix(in srgb, rgb(var(--zg-primary)) 78%, #fff) !important;
-  --button-primary-pressed: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
+  --button-primary-hover: rgb(var(--zg-p-l78)) !important;
+  --button-primary-pressed: rgb(var(--zg-p-d80)) !important;
   --button-primary-text: #ffffff !important;
   --button-secondary-neutral-normal: rgba(255, 255, 255, 0.08) !important;
   --button-secondary-neutral-hover: rgba(255, 255, 255, 0.13) !important;

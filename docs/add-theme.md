@@ -87,3 +87,7 @@ To override one of Zalo's own tokens, set it on `body` with `!important` inside 
 | Editing `glass` in `templates.js` only | Flash of old colours on start, wrong fallback for other themes |
 | Light colours in `ink`/`ink2` | Invisible light-mode borders and icons |
 | Pale `primary` | Illegible bubble/button text |
+
+## No `color-mix()`
+
+Zalo's Electron 22 (Chromium 108) does not support `color-mix()`: a token using it is silently invalid, so mention text and the quote bar lose their colour. Use the precomputed `--zg-p-d80/d66` (primary mixed toward black) and `--zg-p-l55/l78/l38` (toward white) set by `templates.js`; add a pair there if you need another shade.

@@ -60,13 +60,13 @@ body:not(.dark) {
   --divider: rgb(var(--zg-ink) / 0.1) !important;
   --divider-subtle: rgb(var(--zg-ink) / 0.06) !important;
   --border-focused: rgb(var(--zg-primary)) !important;
-  --link: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
-  --cta-link: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
-  --cta-link-primary: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
-  --text-mention: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
+  --link: rgb(var(--zg-p-d80)) !important;
+  --cta-link: rgb(var(--zg-p-d80)) !important;
+  --cta-link-primary: rgb(var(--zg-p-d80)) !important;
+  --text-mention: rgb(var(--zg-p-d80)) !important;
   --button-primary-normal: rgb(var(--zg-primary)) !important;
-  --button-primary-hover: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
-  --button-primary-pressed: color-mix(in srgb, rgb(var(--zg-primary)) 66%, #000) !important;
+  --button-primary-hover: rgb(var(--zg-p-d80)) !important;
+  --button-primary-pressed: rgb(var(--zg-p-d66)) !important;
   --button-primary-text: #ffffff !important;
 
   --shadow-overlay: 0 0 0 1px rgba(255, 255, 255, 0.7) inset, 0 20px 50px rgb(var(--zg-ink) / 0.22) !important;
