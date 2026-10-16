@@ -1,35 +1,179 @@
+<div align="center">
+
 # Lucent
 
-Theme kính mờ (glassmorphism) cho Zalo PC trên macOS, Windows và Linux. Cài bằng cách chèn CSS/JS vào `app.asar` của Zalo, cùng cách với ZaDark. Không cần cài Node: nếu máy không có thì script chạy bằng chính Electron của Zalo.
+Giao diện kính mờ (glassmorphism) cho Zalo PC trên macOS, Windows và Linux.
+
+![License: MIT](https://img.shields.io/badge/license-MIT-6c5ce7)
+![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-0a84ff)
+![Dependencies](https://img.shields.io/badge/dependencies-0-2ecc71)
+
+<img src="docs/img/hero.jpg" alt="Lucent ở chế độ sáng và tối" width="860">
+
+</div>
+
+## Giới thiệu
+
+Lucent thay giao diện mặc định của Zalo PC bằng nền kính mờ, có bốn theme và hai chế độ sáng/tối. Ngoài giao diện, Lucent bổ sung một số tiện ích còn thiếu trong Zalo: che nội dung khi cần, chọn chữ trên ảnh (OCR), xem album theo dải ngang, phím tắt và giảm mức dùng tài nguyên.
+
+Lucent không cần cài thêm phần mềm nào và không có phụ thuộc. Trình cài đặt chèn CSS/JS vào `app.asar` của Zalo, giống cách ZaDark làm, đồng thời sao lưu bản gốc để khôi phục khi cần.
+
+## Tính năng
+
+- **Theme:** Glass (tím), Đại dương, Hoàng hôn, Rừng. Mỗi theme có bản sáng và tối, đổi ngay không cần khởi động lại.
+- **Che nội dung:** ẩn tin nhắn, tên, ảnh đại diện, ảnh và album theo từng nhóm.
+- **OCR trên ảnh:** chọn và sao chép chữ trong trình xem ảnh.
+- **Album cuộn ngang:** hiển thị ảnh gửi theo nhóm thành một dải ngang.
+- **Tạo cuộc họp Google Meet** từ menu của thanh công cụ chat.
+- **Phím tắt** để chuyển hội thoại và thao tác với tin nhắn bằng bàn phím.
+- **Tuỳ chọn hiệu năng:** giảm RAM, tắt tự cập nhật, giảm tải khi cửa sổ bị ẩn.
+- **Pet:** ba nhân vật nhỏ ở góc màn hình, có nhiều trạng thái, có thể tắt.
+
+### Theme
+
+Chọn theme bằng nút con mắt ở thanh bên. Màu sắc của mọi theme đều đi qua các biến `--zg-*`, nên thêm theme mới chỉ cần khai báo một bảng màu (xem [docs/add-theme.md](docs/add-theme.md)).
+
+<p align="center"><img src="docs/img/themes-grid.jpg" alt="Bốn theme ở chế độ sáng và tối" width="820"></p>
+
+### Che nội dung
+
+Có thể bật riêng từng phần:
+
+| Khu vực | Có thể ẩn |
+|---|---|
+| Danh sách hội thoại | Tin nhắn, tên, ảnh đại diện |
+| Khung chat | Nội dung tin nhắn, ảnh và album, tên và avatar |
+| Trình xem ảnh | Ảnh, ảnh thu nhỏ, người gửi |
+
+Phần bị ẩn hiện lại khi rê chuột vào. Khi đang che, pet có thể tự phóng to (tuỳ chọn).
+
+<p align="center"><img src="docs/img/privacy.jpg" alt="Danh sách hội thoại và khung chat khi bật che nội dung" width="820"></p>
+
+### Bảng tuỳ chọn
+
+Nút con mắt ở thanh bên mở bảng tuỳ chọn gồm phần che nội dung, theme, pet và hiệu năng. Thiết lập được lưu theo từng máy.
+
+<table>
+<tr>
+<td width="50%" valign="top"><img src="docs/img/options.jpg" alt="Bảng tuỳ chọn"></td>
+<td width="50%" valign="top"><img src="docs/img/themes-pets.jpg" alt="Chọn theme và pet"></td>
+</tr>
+</table>
+
+### Pet
+
+Có ba nhân vật: Mochi, Mun và Bông. Pet tự đi dạo trong vùng chat, nói vài câu ngẫu nhiên và đổi trạng thái theo cách bạn tương tác:
+
+| Trạng thái | Khi nào |
+|---|---|
+| Vui | Rê chuột vào pet |
+| Ngủ | Sau 60 giây không thao tác |
+| Nổi giận | Bấm liên tục 5 lần |
+| Diễn trò (chích điện, súng nước, thở oxy, khóc, ngất) | Ngẫu nhiên, hoặc khi bấm vào pet |
+
+<p align="center"><img src="docs/img/pets.jpg" alt="Ba nhân vật pet và các trạng thái của Mochi" width="760"></p>
+
+Pet có thể tắt trong bảng tuỳ chọn. Thêm pet mới: [docs/add-pet.md](docs/add-pet.md).
+
+### Google Meet
+
+Menu `…` trên thanh công cụ chat có thêm mục **Tạo cuộc họp Google Meet**. Mục này mở `meet.google.com/new` bằng trình duyệt mặc định.
+
+<p align="center"><img src="docs/img/meet.jpg" alt="Mục Tạo cuộc họp Google Meet trong menu" width="640"></p>
+
+### OCR trên ảnh
+
+Trình xem ảnh tự nhận dạng chữ khi mở ảnh. Chữ được phủ lên đúng vị trí trên ảnh, có thể bôi đen và sao chép bằng `⌘C` / `Ctrl+C`, hoặc bấm **Sao chép tất cả** để lấy toàn bộ. Nút `Aa` trên thanh công cụ (hoặc phím `T`) bật/tắt tính năng này. macOS dùng Vision, Windows dùng `ocr.ps1`, Linux dùng `tesseract`.
+
+<p align="center"><img src="docs/img/ocr.jpg" alt="Bôi đen chữ trực tiếp trên ảnh trong trình xem ảnh" width="820"></p>
+
+### Album, phím tắt
+
+| Tính năng | Cách dùng |
+|---|---|
+| Album | Ảnh gửi theo nhóm hiển thị thành một dải ngang giữ nguyên tỉ lệ, có nút `‹` `›` và chỉ số `k/N`. Cuộn bằng trackpad hoặc `Shift` + lăn chuột. Bật trong bảng tuỳ chọn. |
+| Chuyển hội thoại | `Esc` quay về danh sách. `↑` / `↓` đổi hội thoại, `Enter` mở lại. |
+| Duyệt tin nhắn | Trong ô soạn trống, `↑` vào chế độ duyệt. `↑` / `↓` (hoặc `k` / `j`) đổi tin, `R` trả lời, `F` chuyển tiếp, `E` thả cảm xúc (`1`–`6`, `7` để gỡ), `Esc` thoát. |
+
+### Hiệu năng
+
+Các tuỳ chọn sau áp dụng khi khởi động lại Zalo: giảm RAM (low-end mode), tắt tự cập nhật, giảm tải khi ẩn hoặc thu nhỏ, hoãn nạp cửa sổ thông báo. Lucent cũng luôn tắt bộ đo FPS của Zalo vì nó giữ GPU hoạt động liên tục.
 
 ## Cài đặt
 
-Zalo đã cài sẵn. Script tự tắt Zalo, backup bản gốc vào `~/.zalo-glass-backup/<phiên bản>`, patch rồi mở lại.
+Yêu cầu: đã cài Zalo PC. Node.js không bắt buộc, nếu máy không có thì script dùng Electron của Zalo.
+
+Trình cài đặt sẽ đóng Zalo, sao lưu bản gốc vào `~/.zalo-glass-backup/<phiên bản>`, vá `app.asar` rồi mở lại Zalo.
+
+**macOS / Linux**
 
 ```bash
-./install.sh      # macOS / Linux
+git clone https://github.com/nhthai173/lucent.git
+cd lucent
+./install.sh
+```
+
+**Windows**
+
+```powershell
+git clone https://github.com/nhthai173/lucent.git
+cd lucent
+powershell -ExecutionPolicy Bypass -File install.ps1
+```
+
+Sau khi cài, bấm nút con mắt ở thanh bên để chọn theme và các tuỳ chọn.
+
+Khi Zalo tự cập nhật, bản vá bị ghi đè. Chạy lại script cài đặt để áp dụng lại.
+
+### Gỡ cài đặt
+
+```bash
+./uninstall.sh
 ```
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File install.ps1   # Windows
+powershell -ExecutionPolicy Bypass -File uninstall.ps1
 ```
 
-Zalo tự cập nhật sẽ ghi đè bản patch, chỉ cần chạy lại script. Gỡ bằng `uninstall.sh` / `uninstall.ps1`.
-
-## Tuỳ chọn (biến môi trường)
+### Biến môi trường
 
 | Biến | Ý nghĩa |
 |---|---|
-| `ZALO_APP` | Thư mục cài Zalo, nếu không nằm ở chỗ mặc định |
-| `GLASS_JS` | Danh sách module JS bật, mặc định `"blur album keys ocr pet meet"` (`templates` luôn được nạp đầu tiên) |
-| `GLASS_TRANSPARENT=1` | Cửa sổ trong suốt (chỉ macOS, thử nghiệm) |
+| `ZALO_APP` | Thư mục cài Zalo, nếu không nằm ở vị trí mặc định. |
+| `GLASS_JS` | Danh sách module JS được nạp. Mặc định `"blur album keys ocr pet meet"`. Bỏ một tên khỏi danh sách để tắt tính năng tương ứng. Module `templates` luôn được nạp trước. |
+| `GLASS_TRANSPARENT=1` | Cửa sổ trong suốt. Chỉ macOS, thử nghiệm. |
 
-## Theme và pet (template)
+Ví dụ, chỉ cài theme và tính năng che nội dung:
 
-Chọn trong app: nút con mắt ở sidebar → "Giao diện" (theme) và "Pet" (loại pet), đổi tức thì, lưu theo từng máy. Thêm template mới trong [theme/templates.js](theme/templates.js): theme là một mục trong `THEMES` (ghi đè biến `--zg-*`), pet là một mục trong `PETS` (gọi `fill(...)` đổi màu/tai/lời thoại, hoặc tự viết `svg` theo hợp đồng class `zp-*`).
+```bash
+GLASS_JS="blur" ./install.sh
+```
 
-## Ghi chú
+## Cách hoạt động
 
-- OCR: macOS dùng Vision (cần Xcode Command Line Tools để biên dịch `ocr.swift`), Windows dùng `ocr.ps1`, Linux cần `tesseract` + `tesseract-ocr-vie`.
-- Mới kiểm chứng đầy đủ trên macOS. Đường dẫn cài Zalo trên Windows/Linux là phỏng đoán, sai thì đặt `ZALO_APP`.
-- Dự án không liên quan tới VNG/Zalo. Patch app của bên thứ ba: tự chịu rủi ro.
+`install.mjs` ghép các file trong [theme/](theme) thành một gói CSS và một gói JS, ghi chúng vào `app.asar`, rồi chèn thẻ `<link>` và `<script>` vào các trang của Zalo. Trên macOS, script cập nhật `Info.plist` và ký lại ứng dụng. CSS ghi đè các biến màu của Zalo, JS thêm các thành phần giao diện (nút con mắt, pet, lớp OCR, …). Phần chạy trong tiến trình chính của Electron (tuỳ chọn hiệu năng, máy chủ OCR cục bộ) được chèn vào đầu `bootstrap.js`.
+
+Chi tiết xem [docs/architecture.md](docs/architecture.md).
+
+## Đóng góp
+
+| Việc cần làm | Tài liệu |
+|---|---|
+| Thêm hoặc sửa theme | [docs/add-theme.md](docs/add-theme.md) |
+| Thêm pet, sửa lời thoại và hoạt cảnh | [docs/add-pet.md](docs/add-pet.md), [docs/pet-quotes.md](docs/pet-quotes.md), [docs/pet-animation.md](docs/pet-animation.md) |
+| Thêm module hoặc mục menu | [docs/add-module.md](docs/add-module.md) |
+| Chạy thử và kiểm tra thay đổi | [docs/build-and-verify.md](docs/build-and-verify.md) |
+| Hiệu năng (animation, timer, `backdrop-filter`) | [docs/performance.md](docs/performance.md) |
+
+Commit theo [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `docs:`, …) với tiêu đề tiếng Anh ngắn gọn. Pull request thay đổi giao diện nên kèm ảnh chụp, và cần che tên, avatar thật.
+
+## Lưu ý
+
+- Đã kiểm tra trên macOS và Windows. Đường dẫn cài Zalo trên Linux chưa được kiểm chứng, nếu không tìm thấy thì đặt `ZALO_APP`.
+- OCR trên macOS cần Xcode Command Line Tools để biên dịch `ocr.swift`. OCR trên Linux cần `tesseract` và `tesseract-ocr-vie`.
+- Bản cập nhật của Zalo có thể đổi tên class và làm lệch một số selector. Khi gặp lỗi, hãy mở issue kèm phiên bản Zalo và ảnh chụp.
+- Lucent là dự án cộng đồng, không liên quan tới VNG hay Zalo. Chỉnh sửa ứng dụng của bên thứ ba luôn có rủi ro, hãy cân nhắc trước khi dùng. Bản gốc được lưu trong `~/.zalo-glass-backup/`.
+
+## Giấy phép
+
+[MIT](LICENSE)
