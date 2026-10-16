@@ -67,7 +67,7 @@
     }
   };
 
-  let reg = null, mode = "", x = 0, dir = 1, busy = false, asleep = false, lastAct = Date.now();
+  let lastPerch = false, reg = null, mode = "", x = 0, dir = 1, busy = false, asleep = false, lastAct = Date.now();
   const shown = (el) => {
     const r = el.getBoundingClientRect();
     if (r.width < 40 || !r.height) return false;
@@ -76,7 +76,8 @@
   };
   const region = () => {
     const bar = [...document.querySelectorAll(".chat-box-bar")].find(shown);
-    if (bar) { const r = bar.getBoundingClientRect(); return { mode: "chat", min: r.left + 8, max: r.right - 8 - W, y: r.top + 1 }; }
+    // chọn nhiều tin: thanh "Đã chọn" (.multisel-info) nằm trên bar → pet đứng lên trên nó
+    if (bar) { const r = bar.getBoundingClientRect(), ms = document.querySelector(".multisel-info"); return { mode: "chat", min: r.left + 8, max: r.right - 8 - W, y: (ms ? ms.getBoundingClientRect().top : r.top) + 1 }; }
     const fb = [...document.querySelectorAll(".msg-filters-bar")].find(shown);
     if (!fb) return null;
     const r = fb.getBoundingClientRect();
@@ -100,7 +101,12 @@
     const n = region();
     if (!n) { reg = null; pet.style.display = "none"; return; }
     pet.style.display = "";
-    pet.style.top = n.y - H + "px";
+    const ty = n.y - H, perch = !!document.querySelector(".multisel-info");
+    if (reg && reg.mode === n.mode && perch !== lastPerch) { // thanh "Đã chọn" hiện/ẩn: bật nhảy lên/xuống thanh (vòng cung qua đỉnh cao hơn cả hai chỗ)
+      const from = parseFloat(pet.style.top) || ty;
+      pet.animate([{ top: from + "px" }, { top: Math.min(from, ty) - 22 + "px", offset: .45 }, { top: ty + "px" }], { duration: 420, easing: "cubic-bezier(.4,0,.6,1)" }); hop();
+    }
+    lastPerch = perch; pet.style.top = ty + "px";
     if (!reg || reg.mode !== n.mode) { // đổi chỗ: đặt lại giữa vùng, không trượt
       mode = n.mode; reg = n;
       x = (n.min + n.max) / 2; pet.style.transition = "none"; pet.style.transform = `translateX(${x}px)`;

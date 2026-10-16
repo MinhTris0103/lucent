@@ -40,6 +40,7 @@ body:not(.dark) {
   --white-quote-selected: rgba(255, 255, 255, 0.75) !important;
   --blue-message: rgb(var(--zg-primary) / 0.2) !important;
   --blue-message-selected: rgb(var(--zg-primary) / 0.3) !important;
+  --media-message-selected: rgb(var(--zg-primary)) !important;
   --blue-quote: rgba(255, 255, 255, 0.45) !important;
   --blue-quote-selected: rgba(255, 255, 255, 0.6) !important;
   --self-bubble-chat-shadow: rgba(0, 0, 0, 0) !important;
