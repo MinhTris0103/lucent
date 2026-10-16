@@ -10,25 +10,25 @@ body:not(.dark) {
   --surface-alt: rgba(255, 255, 255, 0.45) !important;
   --layer-background: rgba(255, 255, 255, 0.55) !important;
   --layer-background-subtle: rgba(255, 255, 255, 0.35) !important;
-  --layer-background-hover: rgba(110, 96, 255, 0.08) !important;
+  --layer-background-hover: rgb(var(--zg-primary) / 0.08) !important;
   --layer-background-disabled: rgba(255, 255, 255, 0.3) !important;
-  --layer-background-selected: rgba(110, 96, 255, 0.16) !important;
+  --layer-background-selected: rgb(var(--zg-primary) / 0.16) !important;
   --layer-background-CSC: rgba(255, 255, 255, 0.35) !important;
   --layer-background-pinned: rgba(255, 255, 255, 0.4) !important;
   --layer-background-leftmenu: rgba(255, 255, 255, 0.5) !important;
-  --layer-background-leftmenu-hover: rgba(110, 96, 255, 0.08) !important;
-  --layer-background-leftmenu-selected: rgba(110, 96, 255, 0.18) !important;
+  --layer-background-leftmenu-hover: rgb(var(--zg-primary) / 0.08) !important;
+  --layer-background-leftmenu-selected: rgb(var(--zg-primary) / 0.18) !important;
   --layer-background-navbar-normal: rgba(255, 255, 255, 0.5) !important;
-  --layer-background-navbar-hover: rgba(110, 96, 255, 0.1) !important;
-  --layer-background-navbar-selected: rgba(110, 96, 255, 0.2) !important;
+  --layer-background-navbar-hover: rgb(var(--zg-primary) / 0.1) !important;
+  --layer-background-navbar-selected: rgb(var(--zg-primary) / 0.2) !important;
   --layer-background-navbar-sublevel-normal: rgba(255, 255, 255, 0.4) !important;
-  --layer-background-navbar-sublevel-hover: rgba(110, 96, 255, 0.08) !important;
-  --layer-background-navbar-sublevel-selected: rgba(110, 96, 255, 0.16) !important;
+  --layer-background-navbar-sublevel-hover: rgb(var(--zg-primary) / 0.08) !important;
+  --layer-background-navbar-sublevel-selected: rgb(var(--zg-primary) / 0.16) !important;
   --layer-neutral-information-background: rgba(255, 255, 255, 0.5) !important;
   --background-inactiveness: rgba(255, 255, 255, 0.5) !important;
-  --item-wa-hover: rgba(110, 96, 255, 0.08) !important;
-  --item-wa-select: rgba(110, 96, 255, 0.16) !important;
-  --icon-hover-bg: rgba(110, 96, 255, 0.1) !important;
+  --item-wa-hover: rgb(var(--zg-primary) / 0.08) !important;
+  --item-wa-select: rgb(var(--zg-primary) / 0.16) !important;
+  --icon-hover-bg: rgb(var(--zg-primary) / 0.1) !important;
   --reaction-background: rgba(255, 255, 255, 0.9) !important;
   --timestamp: rgba(0, 0, 0, 0.05) !important;
   --bg-message-info: rgba(255, 255, 255, 0.55) !important;
@@ -38,12 +38,12 @@ body:not(.dark) {
   --white-message-selected: rgba(255, 255, 255, 0.95) !important;
   --white-quote: rgba(255, 255, 255, 0.55) !important;
   --white-quote-selected: rgba(255, 255, 255, 0.75) !important;
-  --blue-message: rgba(110, 96, 255, 0.2) !important;
-  --blue-message-selected: rgba(110, 96, 255, 0.3) !important;
+  --blue-message: rgb(var(--zg-primary) / 0.2) !important;
+  --blue-message-selected: rgb(var(--zg-primary) / 0.3) !important;
   --blue-quote: rgba(255, 255, 255, 0.45) !important;
   --blue-quote-selected: rgba(255, 255, 255, 0.6) !important;
   --self-bubble-chat-shadow: rgba(0, 0, 0, 0) !important;
-  --shadow-bubble: 0 0 0 1px rgba(255, 255, 255, 0.7) inset, 0 3px 12px rgba(80, 70, 160, 0.12) !important;
+  --shadow-bubble: 0 0 0 1px rgba(255, 255, 255, 0.7) inset, 0 3px 12px rgb(var(--zg-primary) / 0.14) !important;
 
   /* input */
   --input-white: rgba(255, 255, 255, 0.6) !important;
@@ -55,27 +55,27 @@ body:not(.dark) {
   --input-field-bg-outline-hover: rgba(255, 255, 255, 0.6) !important;
 
   /* viền + accent */
-  --border: rgba(60, 50, 140, 0.16) !important;
-  --border-subtle: rgba(60, 50, 140, 0.1) !important;
-  --divider: rgba(60, 50, 140, 0.1) !important;
-  --divider-subtle: rgba(60, 50, 140, 0.06) !important;
-  --border-focused: #6e60ff !important;
-  --link: #5848e6 !important;
-  --cta-link: #5848e6 !important;
-  --cta-link-primary: #5848e6 !important;
-  --text-mention: #5848e6 !important;
-  --button-primary-normal: #6e60ff !important;
-  --button-primary-hover: #5848e6 !important;
-  --button-primary-pressed: #4a3bd0 !important;
+  --border: rgb(var(--zg-ink) / 0.16) !important;
+  --border-subtle: rgb(var(--zg-ink) / 0.1) !important;
+  --divider: rgb(var(--zg-ink) / 0.1) !important;
+  --divider-subtle: rgb(var(--zg-ink) / 0.06) !important;
+  --border-focused: rgb(var(--zg-primary)) !important;
+  --link: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
+  --cta-link: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
+  --cta-link-primary: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
+  --text-mention: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
+  --button-primary-normal: rgb(var(--zg-primary)) !important;
+  --button-primary-hover: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
+  --button-primary-pressed: color-mix(in srgb, rgb(var(--zg-primary)) 66%, #000) !important;
   --button-primary-text: #ffffff !important;
 
-  --shadow-overlay: 0 0 0 1px rgba(255, 255, 255, 0.7) inset, 0 20px 50px rgba(60, 50, 140, 0.22) !important;
+  --shadow-overlay: 0 0 0 1px rgba(255, 255, 255, 0.7) inset, 0 20px 50px rgb(var(--zg-ink) / 0.22) !important;
   --curtain: rgba(30, 28, 70, 0.3) !important;
   --toast: rgba(40, 38, 80, 0.85) !important;
 
   /* sidebar: nền gốc của Zalo là xanh đậm nên icon mặc định màu trắng → đổi sang tím đậm */
-  --icon-navbar-normal: #4a4590 !important;
-  --icon-navbar-disabled: rgba(74, 69, 144, 0.4) !important;
+  --icon-navbar-normal: rgb(var(--zg-ink2)) !important;
+  --icon-navbar-disabled: rgb(var(--zg-ink2) / 0.4) !important;
 
   background: transparent !important;
 }
@@ -100,18 +100,18 @@ body:not(.dark) #sidebarNav.compact-mode ~ * main,
 body:not(.dark) .contact-pages.page-container,
 body:not(.dark) aside.search-message-panel-compact {
   background:
-    radial-gradient(60% 50% at 10% 90%, rgba(150, 125, 255, 0.2), transparent 70%),
+    radial-gradient(60% 50% at 10% 90%, rgb(var(--zg-accent) / 0.2), transparent 70%),
     radial-gradient(60% 45% at 85% 10%, rgba(80, 200, 255, 0.16), transparent 70%),
     #f2f3fc !important;
 }
 
 body:not(.dark) aside.compact-chat-info #chatInfo {
   background: #f4f5fd !important;
-  border-left-color: rgba(60, 50, 140, 0.12);
-  box-shadow: -12px 0 40px rgba(60, 50, 140, 0.15);
+  border-left-color: rgb(var(--zg-ink) / 0.12);
+  box-shadow: -12px 0 40px rgb(var(--zg-ink) / 0.15);
 }
 
-html:has(body:not(.dark)) ::-webkit-scrollbar-thumb { background: rgba(60, 50, 140, 0.25) !important; }
+html:has(body:not(.dark)) ::-webkit-scrollbar-thumb { background: rgb(var(--zg-ink) / 0.25) !important; }
 
 /* pill ngày ("Hôm nay", "T6 09/10/2026"): Zalo để chữ trắng, nền kính sáng thì không đọc được */
 body:not(.dark) .chat-date.--time .content { color: var(--text-secondary) !important; }

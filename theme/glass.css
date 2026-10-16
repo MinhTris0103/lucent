@@ -40,8 +40,8 @@ body {
   --white-message-selected: rgba(255, 255, 255, 0.14) !important;
   --white-quote: rgba(255, 255, 255, 0.06) !important;
   --white-quote-selected: rgba(255, 255, 255, 0.1) !important;
-  --blue-message: rgba(110, 96, 255, 0.34) !important;
-  --blue-message-selected: rgba(110, 96, 255, 0.46) !important;
+  --blue-message: rgb(var(--zg-primary) / 0.34) !important;
+  --blue-message-selected: rgb(var(--zg-primary) / 0.46) !important;
   --blue-quote: rgba(0, 0, 0, 0.2) !important;
   --blue-quote-selected: rgba(0, 0, 0, 0.28) !important;
   --self-bubble-chat-shadow: rgba(0, 0, 0, 0) !important;
@@ -72,25 +72,25 @@ body {
   --icon-primary: #e6e9f5 !important;
   --icon-secondary: #a7aec6 !important;
   --icon-navbar-normal: #e6e9f5 !important;
-  --icon-navbar-sublevel-normal: #a99dff !important;
-  --icon-navbar-sublevel-selected: #c3baff !important;
+  --icon-navbar-sublevel-normal: color-mix(in srgb, rgb(var(--zg-primary)) 55%, #fff) !important;
+  --icon-navbar-sublevel-selected: color-mix(in srgb, rgb(var(--zg-primary)) 38%, #fff) !important;
 
   /* viền */
   --border: rgba(255, 255, 255, 0.12) !important;
   --border-subtle: rgba(255, 255, 255, 0.08) !important;
   --border-hover: rgba(255, 255, 255, 0.18) !important;
-  --border-focused: #a99dff !important;
+  --border-focused: color-mix(in srgb, rgb(var(--zg-primary)) 55%, #fff) !important;
   --divider: rgba(255, 255, 255, 0.07) !important;
   --divider-subtle: rgba(255, 255, 255, 0.04) !important;
 
   /* accent */
   --link: #8fa8ff !important;
-  --cta-link: #a99dff !important;
-  --cta-link-primary: #a99dff !important;
-  --text-mention: #a99dff !important;
-  --button-primary-normal: #6e60ff !important;
-  --button-primary-hover: #8577ff !important;
-  --button-primary-pressed: #5848e6 !important;
+  --cta-link: color-mix(in srgb, rgb(var(--zg-primary)) 55%, #fff) !important;
+  --cta-link-primary: color-mix(in srgb, rgb(var(--zg-primary)) 55%, #fff) !important;
+  --text-mention: color-mix(in srgb, rgb(var(--zg-primary)) 55%, #fff) !important;
+  --button-primary-normal: rgb(var(--zg-primary)) !important;
+  --button-primary-hover: color-mix(in srgb, rgb(var(--zg-primary)) 78%, #fff) !important;
+  --button-primary-pressed: color-mix(in srgb, rgb(var(--zg-primary)) 80%, #000) !important;
   --button-primary-text: #ffffff !important;
   --button-secondary-neutral-normal: rgba(255, 255, 255, 0.08) !important;
   --button-secondary-neutral-hover: rgba(255, 255, 255, 0.13) !important;
@@ -109,7 +109,7 @@ body {
 /* ---------- ambient ---------- */
 /* mặc định của theme Glass; template khác (templates.js) ghi đè các biến này lên <html> */
 :root {
-  --zg-accent: 139 120 255;
+  --zg-accent: 139 120 255; --zg-primary: 110 96 255; --zg-ink: 60 50 140; --zg-ink2: 74 69 144; /* ink = viền/chữ phụ của bản sáng */ /* accent = ánh sáng/viền, primary = nút + bong bóng tin nhắn */
   --zg-bg-d: #070814; --zg-bg-l: #eef0fb;
   --zg-d1: rgba(124, 92, 255, 0.42); --zg-d2: rgba(0, 190, 255, 0.28); --zg-d3: rgba(255, 70, 170, 0.26); --zg-d4: rgba(40, 220, 190, 0.18); --zg-d5: rgba(90, 110, 255, 0.16);
   --zg-l1: rgba(150, 125, 255, 0.45); --zg-l2: rgba(80, 200, 255, 0.35); --zg-l3: rgba(255, 130, 200, 0.32); --zg-l4: rgba(90, 230, 200, 0.25);
@@ -158,7 +158,7 @@ body.dark .contact-pages.page-container,
 body.dark aside.search-message-panel-compact {
   background:
     radial-gradient(60% 45% at 85% 10%, rgba(0, 190, 255, 0.10), transparent 70%),
-    radial-gradient(60% 50% at 10% 90%, rgba(124, 92, 255, 0.16), transparent 70%),
+    radial-gradient(60% 50% at 10% 90%, rgb(var(--zg-accent) / 0.16), transparent 70%),
     radial-gradient(50% 40% at 90% 95%, rgba(255, 70, 170, 0.10), transparent 70%),
     #0c0e1d !important;
 }

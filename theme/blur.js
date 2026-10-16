@@ -62,6 +62,24 @@
     } catch {} // server chưa chạy / viewer không có → bỏ nhóm
   };
 
+  // thẻ chọn template có preview (kiểu chọn giao diện của Zalo): theme vẽ khung mini bằng chính biến màu của theme, pet vẽ sprite
+  const preview = (kind, k) => {
+    if (kind === "pet") return `<svg viewBox="-4 -10 48 48" class="zp-sprite">${__zg.PETS[k].svg}</svg>`;
+    const v = __zg.THEMES[k].vars, d = document.body.classList.contains("dark");
+    return `<div class="zg-pv" style="background:radial-gradient(70% 90% at 15% 10%,${v[d ? "--zg-d1" : "--zg-l1"]},transparent),radial-gradient(70% 90% at 95% 100%,${v[d ? "--zg-d3" : "--zg-l3"]},transparent),${v[d ? "--zg-bg-d" : "--zg-bg-l"]}">
+      <i class="zg-pv-nav" style="background:${d ? "rgba(255,255,255,.1)" : "rgba(255,255,255,.55)"}"></i><i class="zg-pv-in" style="background:${d ? "rgba(255,255,255,.18)" : "rgba(255,255,255,.8)"}"></i><i class="zg-pv-out" style="background:rgb(${v["--zg-primary"]})"></i></div>`;
+  };
+  const draws = [];
+  const cards = (kind) => {
+    const row = Object.assign(document.createElement("div"), { className: "zg-cards" }), all = kind === "pet" ? __zg.PETS : __zg.THEMES;
+    const draw = () => {
+      row.innerHTML = Object.entries(all).map(([k, t]) => `<button type="button" data-k="${k}" class="${__zg.get()[kind] === k ? "on" : ""}">${preview(kind, k)}<span>${t.name}</span></button>`).join("");
+    };
+    row.onclick = (e) => { const c = e.target.closest("button"); if (c) __zg.set(kind, c.dataset.k); };
+    draw(); draws.push(draw);
+    return row;
+  };
+
   const buildMenu = () => {
     menu = Object.assign(document.createElement("div"), { id: "zg-menu" }); // lớp phủ; hộp thoại nằm trong
     const dlg = document.createElement("div"), head = document.createElement("header"), x = Object.assign(document.createElement("button"), { type: "button", className: "zg-x", ariaLabel: "Đóng", innerHTML: ICON('<path d="M5 5l14 14M19 5L5 19"/>') });
@@ -77,24 +95,14 @@
     GROUPS.forEach(([title, icon, opts]) => {
       const sec = document.createElement("section"), h = sech(icon, title);
       sec.append(h);
-      if (opts[0] === "@") { // select template: theme ở tiêu đề nhóm, pet nằm cuối nhóm Pet bên dưới
-        const kind = opts.slice(1), s = document.createElement("select"); s.dataset.tpl = kind;
-        s.innerHTML = Object.entries(__zg.THEMES).map(([k, t]) => `<option value="${k}">${t.name}</option>`).join(""); s.value = __zg.get().theme;
-        s.onchange = () => __zg.set(kind, s.value);
-        h.append(s); body.append(sec); return;
-      }
+      if (opts[0] === "@") { sec.append(cards("theme")); body.append(sec); return; } // theme: lưới thẻ preview
       if (!Array.isArray(opts)) { // select Mặc định / Cuộn ngang
         const s = document.createElement("select");
         s.dataset.k = opts; s.innerHTML = '<option value="">Mặc định</option><option value="1">Cuộn ngang</option>'; s.value = isOn(opts) ? "1" : "";
         s.onchange = () => { st[opts] = !!s.value; try { localStorage.setItem(KEY, JSON.stringify(st)); } catch {} render(); };
         h.append(s); body.append(sec); return;
       }
-      if (title === "Pet") { // chọn loại pet
-        const s = document.createElement("select"); s.dataset.tpl = "pet";
-        s.innerHTML = Object.entries(__zg.PETS).map(([k, t]) => `<option value="${k}">${t.name}</option>`).join(""); s.value = __zg.get().pet;
-        s.onchange = () => __zg.set("pet", s.value);
-        h.append(s);
-      }
+      if (title === "Pet") sec.append(cards("pet"));
       opts.forEach(([k, label]) => {
         const l = document.createElement("label");
         l.innerHTML = `<span>${label}</span><input type="checkbox" data-k="${k}">`;
@@ -117,13 +125,13 @@
     if (!btn) {
       btn = Object.assign(document.createElement("div"), { id: "zg-nav", className: "nav__tabs__bottom__btn" });
       buildMenu();
-      btn.onclick = () => menu.classList.toggle("open");
+      btn.onclick = () => { draws.forEach((f) => f()); menu.classList.toggle("open"); }; // vẽ lại: preview theo chế độ sáng/tối hiện tại
     }
     nav.prepend(btn);
     render();
   };
 
-  addEventListener("zg-tpl", () => menu?.querySelectorAll("select[data-tpl]").forEach((s) => (s.value = __zg.get()[s.dataset.tpl])));
+  addEventListener("zg-tpl", () => draws.forEach((f) => f())); // chọn xong (hoặc cửa sổ khác đổi) → vẽ lại thẻ để cập nhật viền chọn
   addEventListener("storage", (e) => {
     if (e.key !== KEY) return;
     st = load(); render();

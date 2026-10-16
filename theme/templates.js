@@ -3,19 +3,22 @@
 (() => {
   const KEY = "zg-tpl", DEF = { theme: "glass", pet: "mochi" };
 
-  // ---- theme: biến màu ghi đè lên <html>; "glass" để trống = mặc định trong glass.css ----
+  // ---- theme: biến màu ghi đè lên <html>; giá trị của "glass" trùng mặc định trong glass.css (dùng để vẽ preview) ----
   const THEMES = {
-    glass: { name: "Glass (tím)", vars: {} },
+    glass: { name: "Glass (tím)", vars: {
+      "--zg-primary": "110 96 255", "--zg-ink": "60 50 140", "--zg-ink2": "74 69 144", "--zg-accent": "139 120 255", "--zg-bg-d": "#070814", "--zg-bg-l": "#eef0fb",
+      "--zg-d1": "rgba(124, 92, 255, 0.42)", "--zg-d2": "rgba(0, 190, 255, 0.28)", "--zg-d3": "rgba(255, 70, 170, 0.26)", "--zg-d4": "rgba(40, 220, 190, 0.18)", "--zg-d5": "rgba(90, 110, 255, 0.16)",
+      "--zg-l1": "rgba(150, 125, 255, 0.45)", "--zg-l2": "rgba(80, 200, 255, 0.35)", "--zg-l3": "rgba(255, 130, 200, 0.32)", "--zg-l4": "rgba(90, 230, 200, 0.25)" } },
     ocean: { name: "Đại dương", vars: {
-      "--zg-accent": "56 189 248", "--zg-bg-d": "#050d16", "--zg-bg-l": "#eaf6fb",
+      "--zg-primary": "2 132 199", "--zg-ink": "20 70 120", "--zg-ink2": "40 90 140", "--zg-accent": "56 189 248", "--zg-bg-d": "#050d16", "--zg-bg-l": "#eaf6fb",
       "--zg-d1": "rgba(14, 116, 255, 0.40)", "--zg-d2": "rgba(0, 200, 220, 0.30)", "--zg-d3": "rgba(60, 120, 255, 0.24)", "--zg-d4": "rgba(40, 220, 170, 0.18)", "--zg-d5": "rgba(80, 160, 255, 0.16)",
       "--zg-l1": "rgba(90, 170, 255, 0.42)", "--zg-l2": "rgba(70, 215, 240, 0.35)", "--zg-l3": "rgba(120, 150, 255, 0.28)", "--zg-l4": "rgba(90, 230, 190, 0.25)" } },
     sunset: { name: "Hoàng hôn", vars: {
-      "--zg-accent": "255 138 76", "--zg-bg-d": "#14080a", "--zg-bg-l": "#fbf0ea",
+      "--zg-primary": "234 88 12", "--zg-ink": "140 60 40", "--zg-ink2": "144 80 60", "--zg-accent": "255 138 76", "--zg-bg-d": "#14080a", "--zg-bg-l": "#fbf0ea",
       "--zg-d1": "rgba(255, 90, 60, 0.38)", "--zg-d2": "rgba(255, 170, 40, 0.26)", "--zg-d3": "rgba(255, 60, 130, 0.28)", "--zg-d4": "rgba(200, 60, 200, 0.18)", "--zg-d5": "rgba(255, 120, 90, 0.16)",
       "--zg-l1": "rgba(255, 140, 100, 0.42)", "--zg-l2": "rgba(255, 200, 90, 0.35)", "--zg-l3": "rgba(255, 120, 170, 0.32)", "--zg-l4": "rgba(230, 150, 230, 0.25)" } },
     forest: { name: "Rừng", vars: {
-      "--zg-accent": "74 222 128", "--zg-bg-d": "#06100a", "--zg-bg-l": "#ecf7ee",
+      "--zg-primary": "22 163 74", "--zg-ink": "30 100 60", "--zg-ink2": "50 120 80", "--zg-accent": "74 222 128", "--zg-bg-d": "#06100a", "--zg-bg-l": "#ecf7ee",
       "--zg-d1": "rgba(30, 190, 100, 0.34)", "--zg-d2": "rgba(120, 220, 60, 0.22)", "--zg-d3": "rgba(0, 170, 150, 0.26)", "--zg-d4": "rgba(200, 220, 60, 0.14)", "--zg-d5": "rgba(60, 200, 120, 0.16)",
       "--zg-l1": "rgba(90, 210, 130, 0.42)", "--zg-l2": "rgba(170, 225, 90, 0.35)", "--zg-l3": "rgba(70, 200, 190, 0.30)", "--zg-l4": "rgba(210, 230, 110, 0.25)" } },
   };
